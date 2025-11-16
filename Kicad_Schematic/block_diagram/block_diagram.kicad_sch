@@ -532,8 +532,8 @@
 			)
 			(symbol "Mode_Select_1_1"
 				(rectangle
-					(start -13.97 13.97)
-					(end 13.97 -2.54)
+					(start -13.97 12.7)
+					(end 13.97 0)
 					(stroke
 						(width 0)
 						(type solid)
@@ -543,7 +543,7 @@
 					)
 				)
 				(pin input line
-					(at -16.51 11.43 0)
+					(at -16.51 10.16 0)
 					(length 2.54)
 					(name "Power"
 						(effects
@@ -561,7 +561,7 @@
 					)
 				)
 				(pin input line
-					(at -16.51 7.62 0)
+					(at -16.51 6.35 0)
 					(length 2.54)
 					(name "Button_1"
 						(effects
@@ -579,7 +579,7 @@
 					)
 				)
 				(pin input line
-					(at -16.51 3.81 0)
+					(at -16.51 2.54 0)
 					(length 2.54)
 					(name "Button_2"
 						(effects
@@ -597,43 +597,7 @@
 					)
 				)
 				(pin input line
-					(at -16.51 0 0)
-					(length 2.54)
-					(name "Switch"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 16.51 7.62 180)
-					(length 2.54)
-					(name "On/Off"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 16.51 3.81 180)
+					(at 16.51 10.16 180)
 					(length 2.54)
 					(name "Mic_Recording"
 						(effects
@@ -651,7 +615,7 @@
 					)
 				)
 				(pin input line
-					(at 16.51 0 180)
+					(at 16.51 6.35 180)
 					(length 2.54)
 					(name "Output_Mode"
 						(effects
@@ -1017,19 +981,20 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "Speaker_W_Amp"
-				(at -0.254 -1.27 0)
+				(at -0.254 15.24 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" ""
-				(at 0 0 0)
+			(property "Value" "~"
+				(at 1.4241 15.24 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(hide yes)
 				)
 			)
 			(property "Footprint" ""
@@ -1062,7 +1027,7 @@
 			(symbol "Speaker_w_Amp_1_1"
 				(rectangle
 					(start -8.89 12.7)
-					(end 8.89 0)
+					(end 11.43 0)
 					(stroke
 						(width 0)
 						(type solid)
@@ -1072,9 +1037,9 @@
 					)
 				)
 				(arc
-					(start 10.16 7.62)
-					(mid 10.6861 6.35)
-					(end 10.16 5.08)
+					(start 12.7 7.62)
+					(mid 13.2261 6.35)
+					(end 12.7 5.08)
 					(stroke
 						(width 0)
 						(type default)
@@ -1084,9 +1049,9 @@
 					)
 				)
 				(arc
-					(start 11.43 8.89)
-					(mid 12.4821 6.35)
-					(end 11.43 3.81)
+					(start 13.97 8.89)
+					(mid 15.0221 6.35)
+					(end 13.97 3.81)
 					(stroke
 						(width 0)
 						(type default)
@@ -1096,9 +1061,9 @@
 					)
 				)
 				(arc
-					(start 12.7 10.16)
-					(mid 14.2782 6.35)
-					(end 12.7 2.54)
+					(start 15.24 10.16)
+					(mid 16.8182 6.35)
+					(end 15.24 2.54)
 					(stroke
 						(width 0)
 						(type default)
@@ -1144,7 +1109,7 @@
 					)
 				)
 				(pin input line
-					(at 8.89 6.35 180)
+					(at 11.43 6.35 180)
 					(length 0)
 					(name "Sound"
 						(effects
@@ -1185,9 +1150,9 @@
 		)
 		(uuid "3592716f-8c85-4348-9270-b008a440758b")
 	)
-	(text "Pull Resistors Needed\n"
+	(text "Pull-Up Resistors Needed\n"
 		(exclude_from_sim no)
-		(at 93.472 93.726 0)
+		(at 96.012 83.82 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1267,6 +1232,16 @@
 	)
 	(wire
 		(pts
+			(xy 45.72 85.09) (xy 45.72 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "128d9207-1a1d-4767-9e5c-aad13c24524c")
+	)
+	(wire
+		(pts
 			(xy 157.48 74.93) (xy 157.48 116.84)
 		)
 		(stroke
@@ -1274,6 +1249,16 @@
 			(type default)
 		)
 		(uuid "129800cc-12cf-4139-a6cf-2e445990309e")
+	)
+	(wire
+		(pts
+			(xy 83.82 85.09) (xy 105.41 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1364c03e-08ef-446b-9502-7a4e6883f2d3")
 	)
 	(wire
 		(pts
@@ -1297,7 +1282,7 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 95.25) (xy 102.87 102.87)
+			(xy 102.87 88.9) (xy 102.87 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1307,7 +1292,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 130.81) (xy 44.45 130.81)
+			(xy 49.53 130.81) (xy 45.72 130.81)
 		)
 		(stroke
 			(width 0)
@@ -1317,7 +1302,17 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 91.44) (xy 105.41 99.06)
+			(xy 83.82 88.9) (xy 102.87 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "41890201-aea5-46c7-8727-999fef6abe33")
+	)
+	(wire
+		(pts
+			(xy 105.41 85.09) (xy 105.41 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1347,16 +1342,6 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 83.82) (xy 50.8 83.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "53441c04-1979-44ca-8f5b-044f3eb9feaa")
-	)
-	(wire
-		(pts
 			(xy 49.53 130.81) (xy 49.53 120.65)
 		)
 		(stroke
@@ -1364,26 +1349,6 @@
 			(type default)
 		)
 		(uuid "6d13ff71-098d-439b-b7ad-79aeab64f673")
-	)
-	(wire
-		(pts
-			(xy 83.82 87.63) (xy 83.82 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "704b09a5-cf9d-43f1-b598-13689dcdee8d")
-	)
-	(wire
-		(pts
-			(xy 83.82 95.25) (xy 102.87 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "72c867b7-01fa-4669-af8d-dfd8de02c301")
 	)
 	(wire
 		(pts
@@ -1457,16 +1422,6 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 130.81) (xy 44.45 83.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a52e34ab-6b74-45ca-b7cc-3224677f9392")
-	)
-	(wire
-		(pts
 			(xy 157.48 116.84) (xy 193.04 116.84)
 		)
 		(stroke
@@ -1474,6 +1429,16 @@
 			(type default)
 		)
 		(uuid "a6d9f4db-742f-4c21-b886-24b8a5b2ab9a")
+	)
+	(wire
+		(pts
+			(xy 50.8 85.09) (xy 45.72 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a71217e1-2007-4896-a908-e81304626c01")
 	)
 	(wire
 		(pts
@@ -1494,26 +1459,6 @@
 			(type default)
 		)
 		(uuid "ba140892-3729-45d8-9dc8-439773047853")
-	)
-	(wire
-		(pts
-			(xy 83.82 91.44) (xy 105.41 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c6e08d8b-f020-4934-bcb3-1c3a21fee098")
-	)
-	(wire
-		(pts
-			(xy 83.82 60.96) (xy 119.38 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ccb9d8a0-ea21-433f-9192-675839d241aa")
 	)
 	(wire
 		(pts
@@ -1849,12 +1794,6 @@
 		)
 		(pin ""
 			(uuid "fea86b6e-d5ec-4c2b-9f66-095509c63b70")
-		)
-		(pin ""
-			(uuid "2f0b27d8-10c7-4e8e-833e-f65c66dde344")
-		)
-		(pin ""
-			(uuid "fea4da70-8b78-4484-b37a-ad20596778e5")
 		)
 		(instances
 			(project ""
