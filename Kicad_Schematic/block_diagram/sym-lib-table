@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Block_Diagram_Blocks")(type "KiCad")(uri "${KIPRJMOD}/Block_Diagram_Blocks.kicad_sym")(options "")(descr ""))
+)
