@@ -19,6 +19,11 @@ RAINBOW = 8
 NUM_PATTERNS = 9
 NUM_STATICS = 8
 
+colors = {
+    OFF : (0 ,0, 0),
+    RED : (255, 0, 0)
+}
+
 class LEDController:
     
     def __init__(self, pattern=RED, static=1):
@@ -38,4 +43,11 @@ class LEDController:
             self.static = 1
         else if self.static && self.pattern >= NUM_STATICS:
             self.static = 0
+        pass
+        
+    def update_pattern(self):
+        if self.static:
+            self.pixels.fill(colors[self.pattern])
+        else
+            pass
         pass
