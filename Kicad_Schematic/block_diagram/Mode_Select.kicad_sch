@@ -650,6 +650,16 @@
 		)
 		(uuid "aab3b1bd-7d5b-43bc-aee7-bc6e1086c151")
 	)
+	(wire
+		(pts
+			(xy 77.47 74.93) (xy 81.28 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7017bb5-2e80-47db-8efd-f8d8d573659e")
+	)
 	(symbol
 		(lib_id "Device:R")
 		(at 81.28 78.74 0)
@@ -788,7 +798,7 @@
 	)
 	(symbol
 		(lib_id "Device:Battery")
-		(at 81.28 69.85 0)
+		(at 72.39 74.93 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -797,25 +807,23 @@
 		(fields_autoplaced yes)
 		(uuid "8a4415e9-1bd6-4737-91c7-916dbf74778c")
 		(property "Reference" "3.3V"
-			(at 85.09 68.0084 0)
+			(at 72.9615 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Value" "From Pico"
-			(at 85.09 70.5484 0)
+			(at 72.9615 69.85 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 81.28 68.326 90)
+			(at 73.914 74.93 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -824,7 +832,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 81.28 68.326 90)
+			(at 73.914 74.93 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -833,7 +841,7 @@
 			)
 		)
 		(property "Description" "Multiple-cell battery"
-			(at 81.28 69.85 0)
+			(at 72.39 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -851,6 +859,72 @@
 			(project ""
 				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d/926b30cc-e3b3-4831-947e-f4c697cfd91e"
 					(reference "3.3V")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 67.31 74.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a36f93a4-6c09-490b-be5d-465e8d743acc")
+		(property "Reference" "#PWR04"
+			(at 67.31 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 67.31 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 67.31 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 67.31 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 67.31 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d9d8fe7a-b6b1-4fdc-8e68-26614bdd4c3a")
+		)
+		(instances
+			(project ""
+				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d/926b30cc-e3b3-4831-947e-f4c697cfd91e"
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)

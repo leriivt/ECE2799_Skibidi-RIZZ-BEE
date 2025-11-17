@@ -424,7 +424,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "To Pico 3.3V pin\n"
+	(text "From Pico 3.3V pin\n"
 		(exclude_from_sim no)
 		(at 101.6 99.06 0)
 		(effects
@@ -434,7 +434,7 @@
 		)
 		(uuid "48dfb20b-5de2-4801-be00-8cd50b837d35")
 	)
-	(text "To Low-Pass-Filter output\n"
+	(text "From Low-Pass-Filter output\n"
 		(exclude_from_sim no)
 		(at 106.68 87.63 0)
 		(effects
@@ -508,6 +508,16 @@
 	)
 	(wire
 		(pts
+			(xy 92.71 100.33) (xy 119.38 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "46b7c731-27c7-42f8-9b58-1c1121797432")
+	)
+	(wire
+		(pts
 			(xy 119.38 96.52) (xy 119.38 100.33)
 		)
 		(stroke
@@ -528,16 +538,6 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 100.33) (xy 119.38 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7cdc1b32-fe13-47fa-93df-2f48deab007f")
-	)
-	(wire
-		(pts
 			(xy 142.24 95.25) (xy 144.78 95.25)
 		)
 		(stroke
@@ -548,13 +548,13 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 88.9) (xy 119.38 88.9)
+			(xy 92.71 88.9) (xy 119.38 88.9)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "acc18104-5931-4c5e-a537-146ca07ab6cd")
+		(uuid "e3ed48e3-f550-4a8f-a694-d09e7c597fdb")
 	)
 	(symbol
 		(lib_id "Device:Speaker")

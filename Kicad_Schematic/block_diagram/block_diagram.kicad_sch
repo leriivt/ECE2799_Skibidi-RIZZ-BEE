@@ -487,15 +487,15 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "Mode_Select"
-				(at 0 15.494 0)
+				(at 0 22.86 0)
 				(effects
 					(font
-						(size 1.27 1.27)
+						(size 2.54 2.54)
 					)
 				)
 			)
 			(property "Value" "~"
-				(at 0 13.97 0)
+				(at 0 20.32 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -532,7 +532,7 @@
 			)
 			(symbol "Mode_Select_1_1"
 				(rectangle
-					(start -13.97 12.7)
+					(start -13.97 19.05)
 					(end 13.97 0)
 					(stroke
 						(width 0)
@@ -543,7 +543,7 @@
 					)
 				)
 				(pin input line
-					(at -16.51 10.16 0)
+					(at -16.51 15.24 0)
 					(length 2.54)
 					(name "Power"
 						(effects
@@ -561,7 +561,7 @@
 					)
 				)
 				(pin input line
-					(at -16.51 6.35 0)
+					(at -16.51 11.43 0)
 					(length 2.54)
 					(name "Button_1"
 						(effects
@@ -579,7 +579,7 @@
 					)
 				)
 				(pin input line
-					(at -16.51 2.54 0)
+					(at -16.51 7.62 0)
 					(length 2.54)
 					(name "Button_2"
 						(effects
@@ -596,8 +596,26 @@
 						)
 					)
 				)
+				(pin unspecified line
+					(at -16.51 3.81 0)
+					(length 2.54)
+					(name "Button_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin input line
-					(at 16.51 10.16 180)
+					(at 16.51 11.43 180)
 					(length 2.54)
 					(name "Mic_Recording"
 						(effects
@@ -615,9 +633,27 @@
 					)
 				)
 				(pin input line
-					(at 16.51 6.35 180)
+					(at 16.51 7.62 180)
 					(length 2.54)
-					(name "Output_Mode"
+					(name "Audio_Mode"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 16.51 3.81 180)
+					(length 2.54)
+					(name "LED_Mode"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -640,10 +676,10 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "Pi_Pico"
-				(at 0 25.4 0)
+				(at 0 31.75 0)
 				(effects
 					(font
-						(size 1.27 1.27)
+						(size 2.54 2.54)
 					)
 				)
 			)
@@ -685,7 +721,7 @@
 			)
 			(symbol "Pi_Pico_1_1"
 				(rectangle
-					(start -19.05 22.86)
+					(start -19.05 26.67)
 					(end 19.05 0)
 					(stroke
 						(width 0)
@@ -696,7 +732,7 @@
 					)
 				)
 				(pin input line
-					(at -21.59 19.05 0)
+					(at -21.59 22.86 0)
 					(length 2.54)
 					(name "Power"
 						(effects
@@ -714,7 +750,7 @@
 					)
 				)
 				(pin input line
-					(at -21.59 15.24 0)
+					(at -21.59 19.05 0)
 					(length 2.54)
 					(name "Recording"
 						(effects
@@ -732,9 +768,27 @@
 					)
 				)
 				(pin input line
+					(at -21.59 15.24 0)
+					(length 2.54)
+					(name "Audio_Mode_Switch"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
 					(at -21.59 11.43 0)
 					(length 2.54)
-					(name "Mode_Switch"
+					(name "LED_Mode_Switch"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1153,7 +1207,7 @@
 	)
 	(text "Pull-Up Resistors Needed\n"
 		(exclude_from_sim no)
-		(at 96.012 83.82 0)
+		(at 99.568 97.79 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1207,6 +1261,16 @@
 	)
 	(wire
 		(pts
+			(xy 86.36 87.63) (xy 86.36 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "04768427-3cd0-4ff9-b7c4-07443026850c")
+	)
+	(wire
+		(pts
 			(xy 160.02 102.87) (xy 153.67 102.87)
 		)
 		(stroke
@@ -1237,7 +1301,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 85.09) (xy 45.72 130.81)
+			(xy 45.72 80.01) (xy 45.72 130.81)
 		)
 		(stroke
 			(width 0)
@@ -1257,16 +1321,6 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 85.09) (xy 105.41 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1364c03e-08ef-446b-9502-7a4e6883f2d3")
-	)
-	(wire
-		(pts
 			(xy 85.09 119.38) (xy 110.49 119.38)
 		)
 		(stroke
@@ -1277,7 +1331,7 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 74.93) (xy 110.49 95.25)
+			(xy 110.49 74.93) (xy 110.49 91.44)
 		)
 		(stroke
 			(width 0)
@@ -1287,13 +1341,13 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 88.9) (xy 102.87 102.87)
+			(xy 83.82 102.87) (xy 110.49 102.87)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "38c7eee0-6957-407a-97af-46b11dd18fbc")
+		(uuid "2eed763f-4a88-4872-b9e4-5703b99469e3")
 	)
 	(wire
 		(pts
@@ -1317,26 +1371,6 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 88.9) (xy 102.87 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "41890201-aea5-46c7-8727-999fef6abe33")
-	)
-	(wire
-		(pts
-			(xy 105.41 85.09) (xy 105.41 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "43dd5bcc-1477-44d0-9097-0124f773632c")
-	)
-	(wire
-		(pts
 			(xy 85.09 124.46) (xy 110.49 124.46)
 		)
 		(stroke
@@ -1347,16 +1381,6 @@
 	)
 	(wire
 		(pts
-			(xy 102.87 102.87) (xy 110.49 102.87)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "526364cc-c8f8-4f98-8577-325fe34e6e27")
-	)
-	(wire
-		(pts
 			(xy 83.82 105.41) (xy 83.82 106.68)
 		)
 		(stroke
@@ -1364,6 +1388,16 @@
 			(type default)
 		)
 		(uuid "59401d0f-bd21-46c2-8a82-67beabc5c418")
+	)
+	(wire
+		(pts
+			(xy 86.36 99.06) (xy 110.49 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6274a305-ace0-41b7-b4f7-d08aa263e324")
 	)
 	(wire
 		(pts
@@ -1394,6 +1428,16 @@
 			(type default)
 		)
 		(uuid "77d4b143-250f-45af-b520-eb8143e472ad")
+	)
+	(wire
+		(pts
+			(xy 45.72 80.01) (xy 50.8 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "806c7dcc-609d-441b-a115-83c11c46743d")
 	)
 	(wire
 		(pts
@@ -1437,6 +1481,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 87.63) (xy 86.36 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "973cc1e0-1ff4-4604-ae20-b25640951279")
+	)
+	(wire
+		(pts
 			(xy 157.48 116.84) (xy 195.58 116.84)
 		)
 		(stroke
@@ -1444,16 +1498,6 @@
 			(type default)
 		)
 		(uuid "a6d9f4db-742f-4c21-b886-24b8a5b2ab9a")
-	)
-	(wire
-		(pts
-			(xy 50.8 85.09) (xy 45.72 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a71217e1-2007-4896-a908-e81304626c01")
 	)
 	(wire
 		(pts
@@ -1467,16 +1511,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 99.06) (xy 110.49 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b8cd95ad-3805-4898-b97e-71e6c25135a7")
-	)
-	(wire
-		(pts
 			(xy 110.49 110.49) (xy 110.49 119.38)
 		)
 		(stroke
@@ -1484,6 +1518,16 @@
 			(type default)
 		)
 		(uuid "ba140892-3729-45d8-9dc8-439773047853")
+	)
+	(wire
+		(pts
+			(xy 88.9 83.82) (xy 88.9 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce06ec00-c5b5-49e4-b4fb-3a2572a7861a")
 	)
 	(wire
 		(pts
@@ -1514,6 +1558,36 @@
 			(type default)
 		)
 		(uuid "de802e9f-22d6-4d8b-b558-456d8300f00b")
+	)
+	(wire
+		(pts
+			(xy 88.9 95.25) (xy 110.49 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e79a822f-5dcd-4554-a62e-567b2001d3be")
+	)
+	(wire
+		(pts
+			(xy 83.82 91.44) (xy 83.82 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f1759c21-794a-4977-add3-d62f3c195b20")
+	)
+	(wire
+		(pts
+			(xy 83.82 83.82) (xy 88.9 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f65933a7-46f3-4cac-bc58-23f6bff68379")
 	)
 	(wire
 		(pts
@@ -1684,7 +1758,7 @@
 		(dnp no)
 		(uuid "863099ff-cb2d-4226-8e86-ce8e73b43be5")
 		(property "Reference" "Pi_Pico"
-			(at 132.08 89.154 0)
+			(at 132.08 82.55 0)
 			(effects
 				(font
 					(size 2.54 2.54)
@@ -1751,6 +1825,9 @@
 		(pin ""
 			(uuid "bf411d36-bb0b-429c-b140-b72fbfef5da9")
 		)
+		(pin ""
+			(uuid "bebe23d8-82d9-4686-acaf-f5a64e70d5d7")
+		)
 		(instances
 			(project ""
 				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d"
@@ -1770,7 +1847,7 @@
 		(dnp no)
 		(uuid "9278f048-2378-43e7-acfc-a2a8fffe23a7")
 		(property "Reference" "Mode_Select"
-			(at 67.31 79.756 0)
+			(at 67.31 72.39 0)
 			(effects
 				(font
 					(size 2.54 2.54)
@@ -1778,7 +1855,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 67.31 81.28 0)
+			(at 67.31 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1827,6 +1904,12 @@
 		)
 		(pin ""
 			(uuid "fea86b6e-d5ec-4c2b-9f66-095509c63b70")
+		)
+		(pin ""
+			(uuid "7b06b29c-6379-46b3-9c11-882b5642e9da")
+		)
+		(pin ""
+			(uuid "7d0e0aa2-6c4d-4bc8-83ed-7a86578f9d0f")
 		)
 		(instances
 			(project ""
