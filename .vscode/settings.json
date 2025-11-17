@@ -1,0 +1,8 @@
+{
+  "python.analysis.extraPaths": [
+    ".venv/Lib/site-packages",
+    "lib"
+  ],
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "basic"
+}
