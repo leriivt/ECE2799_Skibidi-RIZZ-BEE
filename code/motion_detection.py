@@ -7,7 +7,7 @@ import busio
 class IMUController:
 
     def __init__(self):
-        #we are using pins 21 and 21 for I2C
+        #we are using pins 20 and 21 for I2C
         i2c = busio.I2C(scl=board.GP21, sda=board.GP20)
         self.imu = LSM6DSOX(i2c) #.imu is an object based on the Adafruit library
 
