@@ -3,6 +3,25 @@ from adafruit_lsm6ds.lsm6dsox import LSM6DSOX
 import board
 import busio
 
+
+
+class IMUController:
+
+    # i2c = busio.I2C(board.SCL, board.SDA)
+    # sox = adafruit_lsm6ds.LSM6DSOX(i2c)
+
+    def __init__(self):
+        #Initialize IMU components
+        pass
+    def read_orientation(self):
+        #Read orientation data from IMU
+        pass
+    def read_acceleration(self):
+
+        #return angular acceleration
+        return 0
+
+
 #initialize the IMU, set its input pins
 i2c = busio.I2C(scl=board.GP21, sda=board.GP20)
 sox = LSM6DSOX(i2c)
