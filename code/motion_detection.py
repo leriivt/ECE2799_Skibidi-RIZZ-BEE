@@ -4,39 +4,45 @@ import board
 import busio
 
 
-
 class IMUController:
 
-    # i2c = busio.I2C(board.SCL, board.SDA)
-    # sox = adafruit_lsm6ds.LSM6DSOX(i2c)
-
     def __init__(self):
-        #Initialize IMU components
+        #we are using pins 21 and 21 for I2C
+        i2c = busio.I2C(scl=board.GP21, sda=board.GP20)
+        self.imu = LSM6DSOX(i2c) #.imu is an object based on the Adafruit library
+
+        self.imu.accelerometer_range = AccelRange.RANGE_8G
+        self.imu.gyro_range = GyroRange.RANGE_2000_DPS
+        self.imu.accelerometer_data_rate = Rate.RATE_1_66K_HZ
+        self.imu.gyro_data_rate = Rate.RATE_1_66K_HZ
         pass
-    def read_orientation(self):
-        #Read orientation data from IMU
-        pass
+    
+    #returns a tuple with gyro data in radians/s
+    def read_gyro(self):
+        return self.imu.gryo
+    
+    #returns a tuple with accel data in m/s^2
     def read_acceleration(self):
+        return self.imu.acceleration
+    
+    
+    
+    #check if z-axis angular velocity is greater than thresholdS
+    def check_flight_z_gyro(threshold):
+        return self.imu.gyro[2] > threshold
 
-        #return angular acceleration
-        return 0
 
 
-#initialize the IMU, set its input pins
-i2c = busio.I2C(scl=board.GP21, sda=board.GP20)
-sox = LSM6DSOX(i2c)
 
-sensor.accelerometer_range = AccelRange.RANGE_8G
-sensor.gyro_range = GyroRange.RANGE_2000_DPS
-sensor.accelerometer_data_rate = Rate.RATE_1_66K_HZ
-sensor.gyro_data_rate = Rate.RATE_1_66K_HZ
+    #function to send I2C data to IMU to configure interrupt pins
+    #(if we're feelin up for it)
+    def configure_interrupts():
+        pass
 
-#check if z-axis angular velocity is greater than thresholdS
-def check_flight(threshold):
-    return sox.gyro[2] > threshold
 
-#function to send I2C data to IMU to configure interrupt pins
-def configure_interrupts():
+
+
+
 
 
 
