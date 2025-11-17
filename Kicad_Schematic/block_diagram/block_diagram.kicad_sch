@@ -2121,6 +2121,216 @@
 			)
 		)
 	)
+	(sheet
+		(at 125.73 171.45)
+		(size 12.7 3.81)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "13abb167-e2e8-4fd1-a1d2-3e43eead915b")
+		(property "Sheetname" "Speaker and Amplifier"
+			(at 125.73 170.7384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Speaker_w_Amp.kicad_sch"
+			(at 125.73 175.8446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "block_diagram"
+				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 31.75 175.26)
+		(size 12.7 3.81)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "418c02b2-f48a-48bd-9645-52817b40edf0")
+		(property "Sheetname" "Power Schematic"
+			(at 31.75 174.5484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power.kicad_sch"
+			(at 31.75 179.6546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "block_diagram"
+				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 116.84 187.96)
+		(size 12.7 3.81)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "66bf6c33-5aac-4565-8433-307d195f0022")
+		(property "Sheetname" "LED strip"
+			(at 116.84 187.2484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "led_strip.kicad_sch"
+			(at 116.84 192.3546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "block_diagram"
+				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 59.69 173.99)
+		(size 12.7 3.81)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "926b30cc-e3b3-4831-947e-f4c697cfd91e")
+		(property "Sheetname" "Mode Select"
+			(at 59.69 173.2784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Mode_Select.kicad_sch"
+			(at 59.69 178.3846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "block_diagram"
+				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 87.63 173.99)
+		(size 12.7 3.81)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "dd3e34ea-4be4-483e-912f-47aac0384845")
+		(property "Sheetname" "Low Pass Filter"
+			(at 87.63 173.2784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "low_pass_filter.kicad_sch"
+			(at 87.63 178.3846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "block_diagram"
+				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d"
+					(page "4")
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")

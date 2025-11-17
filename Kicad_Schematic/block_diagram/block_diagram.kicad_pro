@@ -412,6 +412,26 @@
     [
       "7a474c3b-855e-4a89-97e9-3d42055b899d",
       "Root"
+    ],
+    [
+      "418c02b2-f48a-48bd-9645-52817b40edf0",
+      "Power Schematic"
+    ],
+    [
+      "926b30cc-e3b3-4831-947e-f4c697cfd91e",
+      "Mode Select"
+    ],
+    [
+      "dd3e34ea-4be4-483e-912f-47aac0384845",
+      "Low Pass Filter"
+    ],
+    [
+      "13abb167-e2e8-4fd1-a1d2-3e43eead915b",
+      "Speaker and Amplifier"
+    ],
+    [
+      "66bf6c33-5aac-4565-8433-307d195f0022",
+      "LED strip"
     ]
   ],
   "text_variables": {}
