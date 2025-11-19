@@ -6,9 +6,19 @@ import pwmio
 import asyncio
 
 
-# import adafruit_lsm6ds
-# import audiopwmio
-# import audioio
+import adafruit_lsm6ds
+import audiopwmio
+import audioio
+
+from audiomp3 import MP3Decoder
+try:
+    from audioio import AudioOut
+
+except ImportError:
+    try:
+        from audiopwmio import PWMAudioOut as AudioOut
+    except ImportError:
+        pass  # not always supported by every board!
 
 
 #contains state logic for the microcontroller: idle, flying, etc.
@@ -23,6 +33,12 @@ def main():
     imu = IMUController()
 
     LED_Pattern = 0
+
+    #Audio stuff
+    mp3files = ["Claypigeons.mp3"]
+    mp3 = open(mp3files[0], "rb")
+    decoder = MP3Decoder(mp3)
+    audio_out = AudioOut(board.A0)
 
     
     while True:
@@ -57,8 +73,20 @@ def main():
 
         elif state == IN_FLIGHT: #perform audio manipulation and output LED patterns
             
-        
-            audio.process_audio(ang_acceleration)
+            while (ang_acceleration > 10): #edit condition pls
+
+                # audio.process_audio(ang_acceleration,mp3)
+                audio_temp = audio.play_audio(mp3)
+
+                
+                print("playing", mp3)
+
+                # This allows you to do other things while the audio plays!
+                while audio_temp.playing:
+                    
+                    audio.process_audio(ang_acceleration, mp3) #Update audio
+
+            audio.stop()
         
 
 
