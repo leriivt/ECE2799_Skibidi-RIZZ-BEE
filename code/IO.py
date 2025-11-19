@@ -6,24 +6,26 @@ class IOController:
     
     def __init__(self):
         #Initialize buttons, switches, leds, amplifier, microphone
-        self.BTN_LED_pin = digitalio.DigitalInOut(board.GP10)
+        self.BTN_LED_pin = digitalio.DigitalInOut(board.GP2) #was 10
         self.BTN_LED_pin.direction = digitalio.Direction.INPUT
         self.BTN_LED_pin.pull = digitalio.Pull.UP
-        self.BTN_LED = Debouncer(BTN_LED_pin)
-        
+        self.BTN_LED = Debouncer(self.BTN_LED_pin)
+        '''
         self.BTN_record = digitalio.DigitalInOut(board.GP11)
         self.BTN_record.direction = digitalio.Direction.INPUT
         self.BTN_record.pull = digitalio.Pull.UP
         self.BTN_audio_sel = digitalio.DigitalInOut(board.GP12)
         self.BTN3_audio_sel.direction = digitalio.Direction.INPUT
         self.BTN3_audio_sel.pull = digitalio.Pull.UP
-        
+        '''
     def update_buttons(self):
         self.BTN_LED.update()
         pass
         
     def check_LED_button(self):
-        return self.BTN_LED.update.value
+        #1 if not pressed
+        #we want 1 if pressed, so add a not
+        return self.BTN_LED.fell
     
     def read_buttons(self): #active low buttons
     
