@@ -596,6 +596,107 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:GND"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "...\n"
 		(exclude_from_sim no)
@@ -609,7 +710,7 @@
 	)
 	(text "From buck converter\n"
 		(exclude_from_sim no)
-		(at 88.9 76.2 0)
+		(at 78.232 76.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -617,15 +718,25 @@
 		)
 		(uuid "102426df-c129-4901-abdd-8b546090e7e6")
 	)
-	(text "To Pico GND\n"
+	(text "From Pico GND\n"
 		(exclude_from_sim no)
-		(at 83.82 100.33 0)
+		(at 76.454 99.822 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 		)
 		(uuid "12ce0230-d369-4f1d-900e-65509aa1f1d7")
+	)
+	(text "From Pico GPIO Pin\n"
+		(exclude_from_sim no)
+		(at 78.232 87.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "16d3a59b-d12e-44d3-97f0-484a5ad162ef")
 	)
 	(text "12 LEDs total"
 		(exclude_from_sim no)
@@ -644,6 +755,12 @@
 		(uuid "257ce5de-3d14-42ad-8377-3c56723f866c")
 	)
 	(junction
+		(at 140.97 97.79)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "34900e7e-5728-456d-af3f-6fe28253794c")
+	)
+	(junction
 		(at 88.9 77.47)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -654,6 +771,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "89dec155-3956-4e3f-b79e-dcdbdeacffa4")
+	)
+	(junction
+		(at 140.97 77.47)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8fa4d79-9596-41a8-9fd1-cca05f44703a")
 	)
 	(junction
 		(at 115.57 97.79)
@@ -693,26 +816,6 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 77.47) (xy 88.9 77.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "377ab81a-965f-43f9-8296-52d54c2fc8ba")
-	)
-	(wire
-		(pts
-			(xy 78.74 97.79) (xy 88.9 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "452b1623-e36d-4c81-a80f-d027359fea57")
-	)
-	(wire
-		(pts
 			(xy 115.57 77.47) (xy 140.97 77.47)
 		)
 		(stroke
@@ -730,6 +833,16 @@
 			(type default)
 		)
 		(uuid "55b2563d-fb4a-4a27-8231-cfbeadceb327")
+	)
+	(wire
+		(pts
+			(xy 67.31 97.79) (xy 88.9 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "629da6f7-d52b-455c-b0a2-a4df010d8f80")
 	)
 	(wire
 		(pts
@@ -753,6 +866,26 @@
 	)
 	(wire
 		(pts
+			(xy 67.31 88.9) (xy 88.9 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f821d91-fa00-4de5-8980-d2e63bae1d55")
+	)
+	(wire
+		(pts
+			(xy 140.97 77.47) (xy 166.37 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9d830ef3-4f8f-4983-96cf-62efe851f831")
+	)
+	(wire
+		(pts
 			(xy 88.9 77.47) (xy 115.57 77.47)
 		)
 		(stroke
@@ -760,6 +893,26 @@
 			(type default)
 		)
 		(uuid "9de31e0a-9745-4548-9993-6b8cc19df919")
+	)
+	(wire
+		(pts
+			(xy 67.31 77.47) (xy 88.9 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a962e87e-561c-4b81-84f5-9e6a4633fbc5")
+	)
+	(wire
+		(pts
+			(xy 140.97 97.79) (xy 166.37 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab99f67f-5a4c-4937-9de1-3b603e4b166d")
 	)
 	(wire
 		(pts
@@ -810,6 +963,28 @@
 			(type default)
 		)
 		(uuid "e93f1c27-f91d-4a3f-a4ec-13333a60288b")
+	)
+	(global_label "5V"
+		(shape input)
+		(at 67.31 77.47 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "02293a8c-de79-46f6-b146-9a65f3810640")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 62.0267 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Device:LED")
@@ -964,6 +1139,72 @@
 			(project "block_diagram"
 				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d/66bf6c33-5aac-4565-8433-307d195f0022"
 					(reference "D3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 67.31 97.79 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "57255de0-9307-4ad6-8e86-f77cc01f47a8")
+		(property "Reference" "#PWR04"
+			(at 67.31 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 67.31 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 67.31 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 67.31 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 67.31 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f51d6aeb-e06b-44fe-8926-db967eb292fc")
+		)
+		(instances
+			(project ""
+				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d/66bf6c33-5aac-4565-8433-307d195f0022"
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)

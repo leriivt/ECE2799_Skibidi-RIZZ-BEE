@@ -3174,10 +3174,10 @@
 		(uuid "c1e7f08c-4a16-488f-adbf-6e6727ac5669")
 	)
 	(junction
-		(at 71.12 69.85)
+		(at 85.09 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "140ad29f-3094-438a-9499-7996fa9c422a")
+		(uuid "16cfa2a3-8ce7-445c-86de-bd1780f20731")
 	)
 	(junction
 		(at 134.62 62.23)
@@ -3222,13 +3222,19 @@
 		(uuid "7e72af05-1fa4-4db9-8c54-5b9d8f7cd024")
 	)
 	(junction
+		(at 71.12 71.12)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7eaffa08-743f-4c6c-a455-edce83d59908")
+	)
+	(junction
 		(at 77.47 109.22)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8d699129-2a70-4ccc-8ac5-a2df09c8adf9")
 	)
 	(junction
-		(at 71.12 77.47)
+		(at 71.12 80.01)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9423b856-bc14-47fb-b91c-113acb7717d2")
@@ -3246,12 +3252,6 @@
 		(uuid "9890737a-d1d6-4c54-b816-a6dc635417d9")
 	)
 	(junction
-		(at 63.5 66.04)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b5e8e1ae-f51e-4ac6-b48c-dd4d7412b31c")
-	)
-	(junction
 		(at 107.95 123.19)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3262,12 +3262,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e442769c-836a-4cec-a762-b78c798b1089")
-	)
-	(junction
-		(at 85.09 69.85)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ffb43a88-b39c-4263-846e-b8c4c4a31155")
 	)
 	(wire
 		(pts
@@ -3371,13 +3365,13 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 73.66) (xy 66.04 69.85)
+			(xy 77.47 68.58) (xy 90.17 68.58)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "15b851bc-f857-48b2-9c76-8b2a1843b160")
+		(uuid "15b582dd-e543-4671-be34-761b9e2ea2e1")
 	)
 	(wire
 		(pts
@@ -3471,7 +3465,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 77.47) (xy 71.12 77.47)
+			(xy 63.5 80.01) (xy 71.12 80.01)
 		)
 		(stroke
 			(width 0)
@@ -3501,17 +3495,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 66.04) (xy 63.5 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3496d240-38b1-45d3-aa89-b75a5b8de2b5")
-	)
-	(wire
-		(pts
-			(xy 71.12 69.85) (xy 85.09 69.85)
+			(xy 71.12 71.12) (xy 85.09 71.12)
 		)
 		(stroke
 			(width 0)
@@ -3591,7 +3575,17 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 69.85) (xy 85.09 71.12)
+			(xy 63.5 67.31) (xy 77.47 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "46d5b791-ea77-4068-bc73-0fdc9f204d7d")
+	)
+	(wire
+		(pts
+			(xy 85.09 59.69) (xy 85.09 71.12)
 		)
 		(stroke
 			(width 0)
@@ -3661,6 +3655,16 @@
 	)
 	(wire
 		(pts
+			(xy 77.47 67.31) (xy 77.47 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "549c16a8-7f03-4397-805c-233509ac8547")
+	)
+	(wire
+		(pts
 			(xy 203.2 69.85) (xy 201.93 69.85)
 		)
 		(stroke
@@ -3671,7 +3675,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 68.58) (xy 40.64 67.31)
+			(xy 40.64 66.04) (xy 40.64 64.77)
 		)
 		(stroke
 			(width 0)
@@ -3701,7 +3705,7 @@
 	)
 	(wire
 		(pts
-			(xy 86.36 77.47) (xy 86.36 73.66)
+			(xy 86.36 80.01) (xy 86.36 73.66)
 		)
 		(stroke
 			(width 0)
@@ -3741,7 +3745,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 77.47) (xy 86.36 77.47)
+			(xy 81.28 80.01) (xy 86.36 80.01)
 		)
 		(stroke
 			(width 0)
@@ -3861,7 +3865,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 71.12) (xy 40.64 72.39)
+			(xy 40.64 68.58) (xy 40.64 69.85)
 		)
 		(stroke
 			(width 0)
@@ -3941,23 +3945,23 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 62.23) (xy 85.09 69.85)
+			(xy 63.5 80.01) (xy 63.5 74.93)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "95cb56a9-500b-4560-a738-597f932fab53")
+		(uuid "94342446-e58b-43b5-8168-10c5d576c5bd")
 	)
 	(wire
 		(pts
-			(xy 66.04 69.85) (xy 71.12 69.85)
+			(xy 71.12 72.39) (xy 71.12 71.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "95d1ee88-4126-42eb-aa46-c083cce5f388")
+		(uuid "9abf9665-eb8a-427c-b777-64e13f5f4c71")
 	)
 	(wire
 		(pts
@@ -3971,7 +3975,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 71.12) (xy 39.37 71.12)
+			(xy 40.64 68.58) (xy 39.37 68.58)
 		)
 		(stroke
 			(width 0)
@@ -4101,7 +4105,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 62.23) (xy 85.09 62.23)
+			(xy 63.5 59.69) (xy 85.09 59.69)
 		)
 		(stroke
 			(width 0)
@@ -4121,7 +4125,7 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 46.99) (xy 78.74 66.04)
+			(xy 78.74 46.99) (xy 78.74 63.5)
 		)
 		(stroke
 			(width 0)
@@ -4141,7 +4145,7 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 66.04) (xy 63.5 66.04)
+			(xy 78.74 63.5) (xy 63.5 63.5)
 		)
 		(stroke
 			(width 0)
@@ -4261,7 +4265,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 73.66) (xy 66.04 73.66)
+			(xy 63.5 71.12) (xy 71.12 71.12)
 		)
 		(stroke
 			(width 0)
@@ -4311,7 +4315,7 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 77.47) (xy 73.66 77.47)
+			(xy 71.12 80.01) (xy 73.66 80.01)
 		)
 		(stroke
 			(width 0)
@@ -4351,7 +4355,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 68.58) (xy 39.37 68.58)
+			(xy 40.64 66.04) (xy 39.37 66.04)
 		)
 		(stroke
 			(width 0)
@@ -4429,7 +4433,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 77.47 77.47 270)
+		(at 77.47 80.01 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4437,14 +4441,6 @@
 		(dnp no)
 		(uuid "106975a3-b0e3-41fa-9e52-6c2baf16bf40")
 		(property "Reference" "R1"
-			(at 77.47 80.264 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1.6 kΩ"
 			(at 77.47 82.804 90)
 			(effects
 				(font
@@ -4452,8 +4448,16 @@
 				)
 			)
 		)
+		(property "Value" "1.6 kΩ"
+			(at 77.47 85.344 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(property "Footprint" ""
-			(at 77.47 75.692 90)
+			(at 77.47 78.232 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4462,7 +4466,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 77.47 77.47 0)
+			(at 77.47 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4471,7 +4475,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 77.47 77.47 0)
+			(at 77.47 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4638,7 +4642,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 71.12 73.66 0)
+		(at 71.12 76.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4647,15 +4651,6 @@
 		(fields_autoplaced yes)
 		(uuid "2e45c931-847c-4c13-b7b7-2780c88b5b80")
 		(property "Reference" "C1"
-			(at 74.93 72.3899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" ".01 µF"
 			(at 74.93 74.9299 0)
 			(effects
 				(font
@@ -4664,8 +4659,17 @@
 				(justify left)
 			)
 		)
+		(property "Value" ".01 µF"
+			(at 74.93 77.4699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
 		(property "Footprint" ""
-			(at 72.0852 77.47 0)
+			(at 72.0852 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4674,7 +4678,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 71.12 73.66 0)
+			(at 71.12 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4683,7 +4687,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 71.12 73.66 0)
+			(at 71.12 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5125,7 +5129,7 @@
 	)
 	(symbol
 		(lib_id "Device:Speaker")
-		(at 34.29 71.12 180)
+		(at 34.29 68.58 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5134,7 +5138,7 @@
 		(fields_autoplaced yes)
 		(uuid "7e92aba1-dfbf-4459-8616-741a85d73dd9")
 		(property "Reference" "LS1"
-			(at 33.782 59.69 0)
+			(at 33.782 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5142,7 +5146,7 @@
 			)
 		)
 		(property "Value" "Speaker"
-			(at 33.782 62.23 0)
+			(at 33.782 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5150,7 +5154,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 34.29 66.04 0)
+			(at 34.29 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5159,7 +5163,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 34.544 69.85 0)
+			(at 34.544 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5168,7 +5172,7 @@
 			)
 		)
 		(property "Description" "Speaker"
-			(at 34.29 71.12 0)
+			(at 34.29 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5524,7 +5528,7 @@
 	)
 	(symbol
 		(lib_id "New_Library:Speaker_Amplifier")
-		(at 52.07 57.15 180)
+		(at 52.07 54.61 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5532,7 +5536,7 @@
 		(dnp no)
 		(uuid "b6f4f61b-5517-4fe4-ad9f-7a6fb77c58db")
 		(property "Reference" "Speaker_Amplifier1"
-			(at 52.07 57.15 0)
+			(at 52.07 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5540,7 +5544,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 52.07 55.88 0)
+			(at 52.07 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5549,7 +5553,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 52.07 57.15 0)
+			(at 52.07 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5558,7 +5562,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 52.07 57.15 0)
+			(at 52.07 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5567,7 +5571,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 52.07 57.15 0)
+			(at 52.07 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)

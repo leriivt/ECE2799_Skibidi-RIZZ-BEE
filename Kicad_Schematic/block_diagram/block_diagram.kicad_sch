@@ -893,6 +893,24 @@
 						)
 					)
 				)
+				(pin input line
+					(at 21.59 3.81 180)
+					(length 2.54)
+					(name "Amp_On/Off"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
 			(embedded_fonts no)
 		)
@@ -1036,10 +1054,10 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "Speaker_W_Amp"
-				(at -0.254 15.24 0)
+				(at 1.778 -4.572 0)
 				(effects
 					(font
-						(size 1.27 1.27)
+						(size 2.54 2.54)
 					)
 				)
 			)
@@ -1082,7 +1100,7 @@
 			(symbol "Speaker_w_Amp_1_1"
 				(rectangle
 					(start -8.89 12.7)
-					(end 11.43 0)
+					(end 11.43 -2.54)
 					(stroke
 						(width 0)
 						(type solid)
@@ -1092,9 +1110,9 @@
 					)
 				)
 				(arc
-					(start 12.7 7.62)
-					(mid 13.2261 6.35)
-					(end 12.7 5.08)
+					(start 12.7 6.35)
+					(mid 13.2261 5.08)
+					(end 12.7 3.81)
 					(stroke
 						(width 0)
 						(type default)
@@ -1104,9 +1122,9 @@
 					)
 				)
 				(arc
-					(start 13.97 8.89)
-					(mid 15.0221 6.35)
-					(end 13.97 3.81)
+					(start 13.97 7.62)
+					(mid 15.0221 5.08)
+					(end 13.97 2.54)
 					(stroke
 						(width 0)
 						(type default)
@@ -1116,9 +1134,9 @@
 					)
 				)
 				(arc
-					(start 15.24 10.16)
-					(mid 16.8182 6.35)
-					(end 15.24 2.54)
+					(start 15.24 8.89)
+					(mid 16.8182 5.08)
+					(end 15.24 1.27)
 					(stroke
 						(width 0)
 						(type default)
@@ -1128,7 +1146,7 @@
 					)
 				)
 				(pin input line
-					(at -11.43 8.89 0)
+					(at -11.43 10.16 0)
 					(length 2.54)
 					(name "Power"
 						(effects
@@ -1146,7 +1164,7 @@
 					)
 				)
 				(pin input line
-					(at -11.43 3.81 0)
+					(at -11.43 5.08 0)
 					(length 2.54)
 					(name "Audio_Input"
 						(effects
@@ -1164,7 +1182,25 @@
 					)
 				)
 				(pin input line
-					(at 11.43 6.35 180)
+					(at -11.43 0 0)
+					(length 2.54)
+					(name "Shut_Down"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 11.43 5.08 180)
 					(length 0)
 					(name "Sound"
 						(effects
@@ -1184,10 +1220,105 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Graphic:SYM_Arrow45_Small"
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board no)
+			(property "Reference" "#SYM"
+				(at 4.318 1.016 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "SYM_Arrow45_Small"
+				(at 0 -2.286 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Filled 45° arrow, 160mil"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Enable" "0"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "symbol arrow angled 45°"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SYM_Arrow45_Small_0_1"
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy -1.524 1.524)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.524 -1.524) (xy 0.254 -1.016) (xy 1.016 -0.254) (xy 1.524 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "Serial\n"
 		(exclude_from_sim no)
-		(at 163.83 98.044 0)
+		(at 164.846 98.044 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1217,7 +1348,7 @@
 	)
 	(text "PWM\n"
 		(exclude_from_sim no)
-		(at 163.576 108.204 0)
+		(at 164.592 108.204 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1236,16 +1367,16 @@
 		(uuid "e762bab9-4797-4788-94de-ac832778c7c8")
 	)
 	(junction
-		(at 157.48 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "566adac2-2647-48f7-b971-b44258ad7c30")
-	)
-	(junction
 		(at 144.78 74.93)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "57e04ca7-e4b2-407e-83e3-478649cc29a3")
+	)
+	(junction
+		(at 158.75 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7bfd8d7d-1c4b-403d-ae77-041111bfc160")
 	)
 	(junction
 		(at 110.49 119.38)
@@ -1271,7 +1402,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 102.87) (xy 153.67 102.87)
+			(xy 161.29 102.87) (xy 153.67 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1291,16 +1422,6 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 74.93) (xy 170.18 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0ed16785-17e8-4833-8f6b-7390c76f36ff")
-	)
-	(wire
-		(pts
 			(xy 45.72 80.01) (xy 45.72 130.81)
 		)
 		(stroke
@@ -1311,7 +1432,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 74.93) (xy 157.48 116.84)
+			(xy 158.75 74.93) (xy 158.75 115.57)
 		)
 		(stroke
 			(width 0)
@@ -1361,7 +1482,17 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 109.22) (xy 160.02 102.87)
+			(xy 158.75 74.93) (xy 171.45 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ce76fa5-d727-4967-a861-a13566604bdc")
+	)
+	(wire
+		(pts
+			(xy 161.29 109.22) (xy 161.29 102.87)
 		)
 		(stroke
 			(width 0)
@@ -1378,6 +1509,16 @@
 			(type default)
 		)
 		(uuid "521fc18d-ac33-4f71-b3c5-41085d5101b1")
+	)
+	(wire
+		(pts
+			(xy 153.67 110.49) (xy 153.67 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "53e4eabd-56a3-49ff-9df6-7fe2f1fdf4d2")
 	)
 	(wire
 		(pts
@@ -1401,7 +1542,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 109.22) (xy 160.02 109.22)
+			(xy 171.45 109.22) (xy 161.29 109.22)
 		)
 		(stroke
 			(width 0)
@@ -1421,7 +1562,7 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 130.81) (xy 49.53 130.81)
+			(xy 156.21 130.81) (xy 49.53 130.81)
 		)
 		(stroke
 			(width 0)
@@ -1441,7 +1582,7 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 74.93) (xy 157.48 74.93)
+			(xy 144.78 74.93) (xy 158.75 74.93)
 		)
 		(stroke
 			(width 0)
@@ -1451,7 +1592,7 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 99.06) (xy 170.18 99.06)
+			(xy 153.67 99.06) (xy 171.45 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1461,7 +1602,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 74.93) (xy 170.18 93.98)
+			(xy 171.45 74.93) (xy 171.45 93.98)
 		)
 		(stroke
 			(width 0)
@@ -1471,7 +1612,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 109.22) (xy 193.04 121.92)
+			(xy 194.31 109.22) (xy 194.31 120.65)
 		)
 		(stroke
 			(width 0)
@@ -1491,7 +1632,17 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 116.84) (xy 195.58 116.84)
+			(xy 153.67 125.73) (xy 196.85 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9f3f8988-366a-414e-9f97-f478d70d5f6d")
+	)
+	(wire
+		(pts
+			(xy 158.75 115.57) (xy 196.85 115.57)
 		)
 		(stroke
 			(width 0)
@@ -1531,6 +1682,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 106.68) (xy 153.67 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d799ac8d-fcb2-48e6-afb0-9106ca9817e6")
+	)
+	(wire
+		(pts
 			(xy 110.49 119.38) (xy 110.49 124.46)
 		)
 		(stroke
@@ -1551,7 +1712,7 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 106.68) (xy 153.67 130.81)
+			(xy 156.21 106.68) (xy 156.21 130.81)
 		)
 		(stroke
 			(width 0)
@@ -1591,7 +1752,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 121.92) (xy 195.58 121.92)
+			(xy 194.31 120.65) (xy 196.85 120.65)
 		)
 		(stroke
 			(width 0)
@@ -1610,24 +1771,26 @@
 		(uuid "fd5e848d-af9a-48be-b37e-0000b35820cf")
 	)
 	(symbol
-		(lib_id "Block_Diagram_Blocks:Low_Pass_Filter")
-		(at 181.61 111.76 0)
+		(lib_id "Graphic:SYM_Arrow45_Small")
+		(at 204.47 93.98 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
+		(in_bom no)
+		(on_board no)
 		(dnp no)
-		(uuid "23d53c0d-1e15-4aa5-9bac-1f5eb5265f5b")
-		(property "Reference" "Low_Pass_Filter"
-			(at 181.61 104.902 0)
+		(fields_autoplaced yes)
+		(uuid "0c8d7fbf-0618-4f32-bee0-8df41d8ee427")
+		(property "Reference" "#SYM2"
+			(at 203.454 89.662 0)
 			(effects
 				(font
-					(size 2.54 2.54)
+					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Value" "~"
-			(at 181.61 102.87 0)
+		(property "Value" "SYM_Arrow45_Small"
+			(at 206.756 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1636,7 +1799,78 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 181.61 111.76 0)
+			(at 204.47 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 204.47 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Filled 45° arrow, 160mil"
+			(at 204.47 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Enable" "0"
+			(at 204.47 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d"
+					(reference "#SYM2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Block_Diagram_Blocks:Low_Pass_Filter")
+		(at 182.88 111.76 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "23d53c0d-1e15-4aa5-9bac-1f5eb5265f5b")
+		(property "Reference" "Low_Pass_Filter"
+			(at 182.88 104.902 0)
+			(effects
+				(font
+					(size 2.54 2.54)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 182.88 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 182.88 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1645,7 +1879,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 181.61 111.76 0)
+			(at 182.88 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1654,7 +1888,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 181.61 111.76 0)
+			(at 182.88 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1679,7 +1913,7 @@
 	)
 	(symbol
 		(lib_id "Block_Diagram_Blocks:LEDs")
-		(at 186.69 101.6 0)
+		(at 187.96 101.6 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1687,7 +1921,7 @@
 		(dnp no)
 		(uuid "56191802-be2b-4092-80d7-21cc6489b506")
 		(property "Reference" "LEDs"
-			(at 186.436 89.154 0)
+			(at 187.706 89.154 0)
 			(effects
 				(font
 					(size 2.54 2.54)
@@ -1695,7 +1929,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 186.69 88.9 0)
+			(at 187.96 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1704,7 +1938,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 186.69 101.6 0)
+			(at 187.96 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1713,7 +1947,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 186.69 101.6 0)
+			(at 187.96 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1722,7 +1956,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 186.69 101.6 0)
+			(at 187.96 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1827,6 +2061,9 @@
 		)
 		(pin ""
 			(uuid "bebe23d8-82d9-4686-acaf-f5a64e70d5d7")
+		)
+		(pin ""
+			(uuid "c49d6f99-9a8b-42d0-8c66-72535270c0ac")
 		)
 		(instances
 			(project ""
@@ -1992,6 +2229,79 @@
 		)
 	)
 	(symbol
+		(lib_id "Graphic:SYM_Arrow45_Small")
+		(at 204.47 96.52 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c796eb13-301e-4370-a099-1d07a53db099")
+		(property "Reference" "#SYM3"
+			(at 203.454 92.202 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "SYM_Arrow45_Small"
+			(at 206.756 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 204.47 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 204.47 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Filled 45° arrow, 160mil"
+			(at 204.47 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Enable" "0"
+			(at 204.47 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7a474c3b-855e-4a89-97e9-3d42055b899d"
+					(reference "#SYM3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Block_Diagram_Blocks:Power")
 		(at 132.08 66.04 0)
 		(unit 1)
@@ -2135,7 +2445,7 @@
 	)
 	(symbol
 		(lib_id "Block_Diagram_Blocks:Speaker_w_Amp")
-		(at 207.01 125.73 0)
+		(at 208.28 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2143,7 +2453,7 @@
 		(dnp no)
 		(uuid "efdab3d7-5232-48f8-83b7-bb393dc1ca5e")
 		(property "Reference" "Speaker_W_Amp"
-			(at 208.788 127.762 0)
+			(at 210.058 130.302 0)
 			(effects
 				(font
 					(size 2.54 2.54)
@@ -2151,7 +2461,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 208.4341 110.49 0)
+			(at 209.7041 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2160,7 +2470,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 207.01 125.73 0)
+			(at 208.28 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2169,7 +2479,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 207.01 125.73 0)
+			(at 208.28 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2178,7 +2488,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 207.01 125.73 0)
+			(at 208.28 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2194,6 +2504,9 @@
 		)
 		(pin ""
 			(uuid "cda06b9f-694a-40e1-b21c-2000fdcd7948")
+		)
+		(pin ""
+			(uuid "9e43c66a-353d-4fa6-b4e5-6ecf55fb49d8")
 		)
 		(instances
 			(project ""

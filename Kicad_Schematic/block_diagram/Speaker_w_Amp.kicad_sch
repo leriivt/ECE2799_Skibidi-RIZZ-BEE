@@ -424,15 +424,25 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "From Pico 3.3V pin\n"
+	(text "From Buck Converter\n\n"
 		(exclude_from_sim no)
-		(at 101.6 99.06 0)
+		(at 102.616 100.33 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 		)
 		(uuid "48dfb20b-5de2-4801-be00-8cd50b837d35")
+	)
+	(text "From Pico GPIO Pin\n"
+		(exclude_from_sim no)
+		(at 102.108 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "4a875982-7574-4e7d-afe4-ae60aadbf4e1")
 	)
 	(text "From Low-Pass-Filter output\n"
 		(exclude_from_sim no)
@@ -449,12 +459,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8258e5bb-a868-4104-8995-499ab3c78c27")
-	)
-	(junction
-		(at 119.38 100.33)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e0dd8f60-af15-41b9-bb2d-a988bc9bd94b")
 	)
 	(wire
 		(pts
@@ -475,6 +479,16 @@
 			(type default)
 		)
 		(uuid "27abdf5a-08c8-4ad1-bd16-3f99f8b2466c")
+	)
+	(wire
+		(pts
+			(xy 92.71 96.52) (xy 119.38 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a2c3f69-0bc1-443e-b7e3-5ebb6b316ef4")
 	)
 	(wire
 		(pts
@@ -518,16 +532,6 @@
 	)
 	(wire
 		(pts
-			(xy 119.38 96.52) (xy 119.38 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "59fda95a-c873-49fb-9304-ee3bcbf44c2a")
-	)
-	(wire
-		(pts
 			(xy 142.24 93.98) (xy 142.24 95.25)
 		)
 		(stroke
@@ -555,6 +559,28 @@
 			(type default)
 		)
 		(uuid "e3ed48e3-f550-4a8f-a694-d09e7c597fdb")
+	)
+	(global_label "5V"
+		(shape input)
+		(at 92.71 100.33 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4ef17ea5-2e8d-4178-afd3-b1f5215367dc")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 87.4267 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Device:Speaker")
