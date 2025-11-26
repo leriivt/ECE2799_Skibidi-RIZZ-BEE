@@ -1,28 +1,47 @@
+#general imports
 import time
 import board
 from LEDs import *
+from audio import *
 from IO import *
-
+from motion_detection import *
+import digitalio
 import pwmio
 import asyncio
 
+#mode select
+from adafruit_debouncer import Debouncer
 
+#imu
 import adafruit_lsm6ds
-import audiopwmio
-import audioio
 
+#audio
 from audiomp3 import MP3Decoder
-try:
-    from audioio import AudioOut
+from audiopwmio import PWMAudioOut as AudioOut
+import pio_i2s 
+import array
+import adafruit_wave
+import audiobusio
+import audiocore
+import audiodelays
 
-except ImportError:
-    try:
-        from audiopwmio import PWMAudioOut as AudioOut
-    except ImportError:
-        pass  # not always supported by every board!
+
+#SD Card
+import os
+import adafruit_sdcard
+import storage
+
+
+#leds
+import neopixel
 
 
 #contains state logic for the microcontroller: idle, flying, etc.
+
+#IMPORTANT
+#SD Card is only peripheral initialized within code.py, everything else within respective files
+    #possible also audio so other tasks can be performed while this occurs
+
 def main():
 
     IDLE = 0
@@ -35,11 +54,15 @@ def main():
 
     LED_Pattern = 0
 
-    #Audio stuff
-    mp3files = ["Claypigeons.mp3"]
-    mp3 = open(mp3files[0], "rb")
-    decoder = MP3Decoder(mp3)
-    audio_out = AudioOut(board.A0)
+
+    #file path: "/sd"
+    setup_SD()
+    PATH = '/sd/kpop.wav' #initial path to kpop demon hunters
+
+    #For testing:
+    onboard_led = digitalio.DigitalInOut(board.LED)
+    onboard_led.direction = digitalio.Direction.OUTPUT
+
 
     
     while True:
@@ -56,55 +79,65 @@ def main():
         '''
         
         #check acceleration
-        ang_acceleration = imu.read_acceleration()
-        ang_orientation = imu.read_orientation()
+        ang_acceleration = imu.read_acceleration() #scale from value 1-10: 
+        ang_orientation = imu.read_orientation()   #scale from value 1-10
 
-        if(ang_acceleration <= 10):
+        if(ang_acceleration <= 5):
             state = IDLE
         else:
             state = IN_FLIGHT
+            audio.process_audio() # Saves several pitch-shifted copies of the same audio file
 
-        #state logic
-        if state == IDLE: #check buttons
-            
-            button = io.read_buttons()
+        #State logic
+        match(state):
 
-            if button == 0: #No button pressed
-                pass
-            elif button == 1: #BTN1 -> Record audio
-                io.record_audio()
-                pass
-            elif button == 2: #BTN2 -> Toggle audio
-                io.toggle_audio()
-                
-                pass
-            elif button == 3: #BTN2 -> Change LED Pattern
-                led.set_pattern(LED_Pattern)
-                pass
-        
+            case 0: #IDLE
 
-        elif state == IN_FLIGHT: #perform audio manipulation and output LED patterns
-            
-            while (ang_acceleration > 10): #edit condition pls
+                button = io.read_buttons()
 
-                # audio.process_audio(ang_acceleration,mp3)
-                audio_temp = audio.play_audio(mp3)
+                if button == 0: #No button pressed
+                    pass
 
-                
-                print("playing", mp3)
+                elif button == 1: #BTN1 -> Record audio
 
-                # This allows you to do other things while the audio plays!
-                while audio_temp.playing:
+                    audio.start_recording()
+
+                    while(button == 1): #Press and hold to record audio
+                        audio.record_audio()
+                        button = io.read_buttons()
+                        # led.light_up(RED)
+
+                    audio.stop_recording()
                     
-                    audio.process_audio(ang_acceleration, mp3) #Update audio
+                elif button == 2: #BTN2 -> Toggle audio
+                    audio.toggle_audio()
+                    
 
-            audio.stop()
+                elif button == 3: #BTN2 -> Change LED Pattern
+                    led.set_pattern(LED_Pattern)
+                    
+           
+            case 1: #IN_FLIGHT
+
+                audio.play_audio(ang_acceleration)
+                #led.do_led_shit()
+
+                
+                    
+
+                
         
-
-
+            
+            
         time.sleep(0.01)  # 10 ms delay prevents 100% CPU usage
 
 
+def setup_SD():
+    cs = digitalio.DigitalInOut(board.GP19) # Chip Select
+    spi = busio.SPI(board.GP10, board.GP11, board.GP12)  # CLK, SI, SO
+    sdcard = adafruit_sdcard.SDCard(spi, cs)
+    vfs = storage.VfsFat(sdcard)
+    storage.mount(vfs, "/sd")
 
     
 

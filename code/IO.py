@@ -3,9 +3,11 @@ import board
 from adafruit_debouncer import Debouncer
 
 class IOController:
+
+
     
     def __init__(self):
-        #Initialize buttons, switches, leds, amplifier, microphone
+        #Initialize buttons 
         self.BTN_LED_pin = digitalio.DigitalInOut(board.GP2) #was 10
         self.BTN_LED_pin.direction = digitalio.Direction.INPUT
         self.BTN_LED_pin.pull = digitalio.Pull.UP
@@ -18,6 +20,8 @@ class IOController:
         self.BTN3_audio_sel.direction = digitalio.Direction.INPUT
         self.BTN3_audio_sel.pull = digitalio.Pull.UP
         '''
+
+        
     def update_buttons(self):
         self.BTN_LED.update()
         pass
@@ -38,10 +42,4 @@ class IOController:
         else: #No button pressed
             return 0
         
-    def toggle_audio(self): #toggle between microphone recorded audio & Kpop demon hunters
 
-        pass
-
-    def record_audio(self):
-
-        pass
