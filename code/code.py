@@ -16,8 +16,6 @@ from adafruit_debouncer import Debouncer
 import adafruit_lsm6ds
 
 #audio
-from audiomp3 import MP3Decoder
-from audiopwmio import PWMAudioOut as AudioOut
 import pio_i2s 
 import array
 import adafruit_wave
@@ -57,7 +55,7 @@ def main():
 
     #file path: "/sd"
     setup_SD()
-    PATH = '/sd/kpop.wav' #initial path to kpop demon hunters
+    #PATH = '/sd/kpop.wav' #initial path to kpop demon hunters
 
     #For testing:
     onboard_led = digitalio.DigitalInOut(board.LED)
@@ -79,14 +77,14 @@ def main():
         '''
         
         #check acceleration
-        ang_acceleration = imu.read_acceleration() #scale from value 1-10: 
+        ang_acceleration = imu.read_acceleration() #scale from value 1-10
         ang_orientation = imu.read_orientation()   #scale from value 1-10
 
         if(ang_acceleration <= 5):
             state = IDLE
         else:
             state = IN_FLIGHT
-            audio.process_audio() # Saves several pitch-shifted copies of the same audio file
+            audio.process_audio(ang_acceleration) # Saves several pitch-shifted copies of the same audio file
 
         #State logic
         match(state):
@@ -119,15 +117,8 @@ def main():
            
             case 1: #IN_FLIGHT
 
-                audio.play_audio(ang_acceleration)
-                #led.do_led_shit()
-
+                audio.play_audio(imu, led) #playaudio is blocking, needs imu and led instances to continue flight functionality
                 
-                    
-
-                
-        
-            
             
         time.sleep(0.01)  # 10 ms delay prevents 100% CPU usage
 

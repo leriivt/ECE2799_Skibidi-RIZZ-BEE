@@ -1,4 +1,5 @@
 from adafruit_lsm6ds.lsm6dsox import LSM6DSOX
+from adafruit_lsm6ds import Rate, AccelRange, GyroRange
 
 import board
 import busio
@@ -19,7 +20,7 @@ class IMUController:
     
     #returns a tuple with gyro data in radians/s
     def read_gyro(self):
-        return self.imu.gryo
+        return self.imu.gyro
     
     #returns a tuple with accel data in m/s^2
     def read_acceleration(self):
@@ -28,7 +29,7 @@ class IMUController:
     
     
     #check if z-axis angular velocity is greater than thresholdS
-    def check_flight_z_gyro(threshold):
+    def check_flight_z_gyro(self, threshold):
         return self.imu.gyro[2] > threshold
 
 
@@ -36,7 +37,7 @@ class IMUController:
 
     #function to send I2C data to IMU to configure interrupt pins
     #(if we're feelin up for it)
-    def configure_interrupts():
+    def configure_interrupts(self):
         pass
 
 
