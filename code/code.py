@@ -85,39 +85,54 @@ def main():
         else:
             state = IN_FLIGHT
             audio.process_audio(ang_acceleration) # Saves several pitch-shifted copies of the same audio file
+            
+            #start showin the LED pattern
+            led.update_pattern()
+            led.show_pattern()
 
-        #State logic
-        match(state):
+        #State logic (changed to if statement since CircuitPython doesnt do match)
+        if state == IDLE: 
 
-            case 0: #IDLE
+            io.update_buttons()
+                
+            button = io.read_buttons()
 
-                button = io.read_buttons()
-
-                if button == 0: #No button pressed
-                    pass
-
-                elif button == 1: #BTN1 -> Record audio
-
-                    audio.start_recording()
-
-                    while(button == 1): #Press and hold to record audio
-                        audio.record_audio()
-                        button = io.read_buttons()
-                        # led.light_up(RED)
-
-                    audio.stop_recording()
+            if button == 0: #No button pressed
+                pass
                     
-                elif button == 2: #BTN2 -> Toggle audio
-                    audio.toggle_audio()
                     
+            elif button == 1: #BTN1 -> Record audio; at this point this button has been long pressed
+                        
+                #turn LEDs red
+                #show red LEDs
+                led.record_start()
+                
+                audio.start_recording()
 
-                elif button == 3: #BTN2 -> Change LED Pattern
-                    led.set_pattern(LED_Pattern)
+                while(io.check_recording()): #Press and hold to record audio
+                    audio.record_audio()
+                    io.update_buttons()
+
+                audio.stop_recording()
+                            
+                #turn LEDS off
+                #show leds off, reload stored pattern
+                led.record_end()
                     
-           
-            case 1: #IN_FLIGHT
+            elif button == 2: #BTN2 -> Toggle audio
+                audio.toggle_audio()
 
-                audio.play_audio(imu, led) #playaudio is blocking, needs imu and led instances to continue flight functionality
+            elif button == 3: #BTN2 -> Change LED Pattern
+                led.increment_pattern()
+                led.blink()
+                led.update_pattern()
+                    
+                    
+        else: #IN_FLIGHT
+            #if a catch is detected:
+                #led.blink(num_blinks=3, blink_time_on=0.15, blink_time_off=0.1)
+                
+            audio.play_audio(imu, led) #playaudio is blocking, needs imu and led instances to continue flight functionality
                 
             
         time.sleep(0.01)  # 10 ms delay prevents 100% CPU usage
