@@ -64,17 +64,6 @@ def main():
 
     
     while True:
-        #code from 11/18 testing button for LEDs
-        '''
-        led.update_pattern()
-    
-        io.update_buttons()
-    
-        if io.check_LED_button():
-            led.increment_pattern()
-            #led.update_pattern()
-            #time.sleep(0.10)
-        '''
         
         #check acceleration
         ang_acceleration = imu.read_acceleration() #scale from value 1-10
