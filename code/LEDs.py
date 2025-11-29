@@ -44,8 +44,8 @@ colors = {
 }
 
 animation_delay = {
-    RAINBOW : 0.02
-    HUNTRIX : 0.02
+    RAINBOW : 0.02,
+    HUNTRIX : 0.02,
     GOLDEN : 0.13
 }
 
@@ -108,7 +108,7 @@ class LEDController:
         self.pixels[:] = colors[pattern]
         self.last_update = time.monotonic()
         
-    def dynamic_update(self):
+    def dynamic_update_show(self):
         current_time = time.monotonic()
         if (not self.static) and (current_time - self.last_update >= animation_delay[self.pattern]):
             if self.pattern == RAINBOW:
@@ -121,6 +121,7 @@ class LEDController:
             self.last_update = current_time
             self.dynamic_offset += 1
             self.pixels[:] = pixel_list
+            self.show_pattern()
     
     def show_pattern(self):
         self.pixels.show()
@@ -203,5 +204,7 @@ class LEDController:
             self.pixels.show()
             time.sleep(wait)
     '''
+
+
 
 
