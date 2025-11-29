@@ -43,6 +43,12 @@ colors = {
     DIM : [(20 ,20, 20)] * NUM_PIXELS
 }
 
+animation_delay = {
+    RAINBOW : 0.02
+    HUNTRIX : 0.02
+    GOLDEN : 0.13
+}
+
 def hue_cycle(current, start, end, multiplier, num_pixels):
     hue_length = (end-start)*2
     current = current % hue_length
@@ -74,6 +80,7 @@ class LEDController:
         self.pattern = pattern
         self.static = static
         self.dynamic_offset = 0 #offset for cycling through dynamic patterns
+        self.last_update = 0
         self.num_pixels = NUM_PIXELS
         
         self.pixels = neopixel.NeoPixel(board.GP22, self.num_pixels)
@@ -99,6 +106,21 @@ class LEDController:
         if pattern == None:
             pattern = self.pattern
         self.pixels[:] = colors[pattern]
+        self.last_update = time.monotonic()
+        
+    def dynamic_update(self):
+        current_time = time.monotonic()
+        if (not self.static) and (current_time - self.last_update >= animation_delay[self.pattern]):
+            if self.pattern == RAINBOW:
+                pixel_list = rainbow_cycle(self.dynamic_offset, self.num_pixels)
+            elif self.pattern == HUNTRIX:
+                pixel_list = hue_cycle(self.dynamic_offset, 110, 230, 5, self.num_pixels)
+            else: #GOLDEN
+                pixel_list = hue_cycle(self.dynamic_offset, 14, 22, 4, self.num_pixels)
+            
+            self.last_update = current_time
+            self.dynamic_offset += 1
+            self.pixels[:] = pixel_list
     
     def show_pattern(self):
         self.pixels.show()
@@ -112,8 +134,7 @@ class LEDController:
         time.sleep(0.1)
         
         for x in range(num_blinks):
-            
-            
+                     
             self.update_pattern(pattern)
             self.show_pattern()
             time.sleep(blink_time_on)
@@ -134,6 +155,8 @@ class LEDController:
         self.update_pattern(OFF)
         pass
     
+    
+    #-----------------------------------------------
     def rainbow_cycle(self, wait):
         for color in range(255):
             for pixel in range(len(self.pixels)):
