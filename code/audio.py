@@ -39,13 +39,14 @@ properties = {  # These properties will be shared with audioeffects objects
 class AudioController:
     def __init__(self):
         #Initialize audio input/output components
-        self.speaker = digitalio.DigitalInOut(board.GP2)
-        self.audio = AudioOut(board.A0)
+        self.audio = AudioOut(board.GP4)
+        self.sd = digitalio.DigitalInOut(board.GP2)
+        self.sd.direction = digitalio.Direction.OUTPUT
 
         self.mic = pio_i2s.I2S(
-        bit_clock=board.GP3,
-        word_select=board.GP4,
-        data_in=board.GP1,
+        bit_clock=board.GP14,
+        word_select=board.GP15,
+        data_in=board.GP13,
         **properties
         )
 
@@ -176,6 +177,19 @@ class AudioController:
             else:
                 self.stop_audio = False
                 self.path = "/sd/kpop.wav"
+
+    def speaker_off(self):
+        if(self.sd == True):
+            pass
+        else:
+            self.sd = True
+
+    def speaker_on(self):
+        if(self.sd == False):
+            pass
+        else:
+            self.sd = False
+
       
 
 

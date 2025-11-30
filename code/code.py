@@ -73,6 +73,8 @@ def main():
         #State logic (changed to if statement since CircuitPython doesnt do match)
         if state == IDLE: 
 
+            audio.speaker_off()
+
             io.update_buttons()
                 
             button = io.read_buttons()
@@ -82,7 +84,7 @@ def main():
                     
                     
             elif button == 1: #BTN1 -> Record audio; at this point this button has been long pressed
-                        
+                
                 #turn LEDs red
                 #show red LEDs
                 led.record_start()
@@ -111,7 +113,7 @@ def main():
         else: #IN_FLIGHT
             #if a catch is detected:
                 #led.blink(num_blinks=3, blink_time_on=0.15, blink_time_off=0.1)
-
+            audio.speaker_on()
             audio.play_audio(imu, led) #playaudio is blocking, needs imu and led instances to continue flight functionality
                 
             
@@ -119,11 +121,14 @@ def main():
 
 
 def setup_SD():
-    cs = digitalio.DigitalInOut(board.GP19) # Chip Select
-    spi = busio.SPI(board.GP10, board.GP11, board.GP12)  # CLK, SI, SO
-    sdcard = adafruit_sdcard.SDCard(spi, cs)
-    vfs = storage.VfsFat(sdcard)
-    storage.mount(vfs, "/sd")
+    try:
+        cs = digitalio.DigitalInOut(board.GP8) # Chip Select
+        spi = busio.SPI(board.GP10, board.GP9, board.GP5)  # CLK, SI, SO
+        sdcard = adafruit_sdcard.SDCard(spi, cs)
+        vfs = storage.VfsFat(sdcard)
+        storage.mount(vfs, "/sd")
+    except(Exception):
+        print("SD Card BS")
 
     
 
