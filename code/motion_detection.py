@@ -1,44 +1,168 @@
 from adafruit_lsm6ds.lsm6dsox import LSM6DSOX
-from adafruit_lsm6ds import Rate, AccelRange, GyroRange
+from adafruit_lsm6ds import Rate, AccelRange, GyroRange, AccelHPF
 
 import board
 import busio
-
+import math
+import time
 
 class IMUController:
 
-    def __init__(self):
+    def __init__(self, flight_threshold, catch_threshold):
         #we are using pins 20 and 21 for I2C
         i2c = busio.I2C(scl=board.GP21, sda=board.GP20)
         self.imu = LSM6DSOX(i2c) #.imu is an object based on the Adafruit library
 
-        self.imu.accelerometer_range = AccelRange.RANGE_8G
+        self.imu.accelerometer_range = AccelRange.RANGE_2G
         self.imu.gyro_range = GyroRange.RANGE_2000_DPS
-        self.imu.accelerometer_data_rate = Rate.RATE_1_66K_HZ
-        self.imu.gyro_data_rate = Rate.RATE_1_66K_HZ
+        self.imu.accelerometer_data_rate = Rate.RATE_833_HZ
+        self.imu.gyro_data_rate = Rate.RATE_833_HZ
+        
+        self.imu.high_pass_filter(AccelHPF.HPF_DIV100)
+        self.imu.reset()
+
+        #force flight_threshold to be positive
+        self.flight_threshold = flight_threshold if flight_threshold >= 0 else flight_threshold * -1
+        
+        #force catch_threshold to be negative
+        self.catch_threshold = catch_threshold if catch_threshold <= 0 else catch_threshold * -1
+        
+        self.flying = False
+        self.velocity_x = 0
+        self.velocity_y = 0
+        self._last_update_time = None
+        self._last_acc_x = 0
+        self._last_acc_y = 0
+
         pass
     
-    #returns a tuple with gyro data in radians/s
+    
     def read_gyro(self):
+        '''
+        Returns a tuple with gyro data in radians/s
+        '''
         return self.imu.gyro
     
-    #returns a tuple with accel data in m/s^2
     def read_acceleration(self):
+        '''
+        Returns a tuple with accel data in m/s^2
+        '''
         return self.imu.acceleration
     
+    def _get_dt(self):
+        '''
+        Returns the fractional change in seconds between the last update and now
+        '''
+        now = time.monotonic()
+        if self._last_update_time is None:
+            self._last_update_time = now
+            return 0.0
+        dt = now - self._last_update_time
+        self._last_update_time = now
+        return dt
     
+    def update_velocity(self):
+        '''
+        Continously integrates velocity based on the current acceleration\n
+        Uses trapezoidal integration\n
+        Should be run every loop while flying
+        '''
+        dt = min(self._get_dt(), 0.05)  # e.g. cap at 50 ms
+        ax, ay, az = self.imu.acceleration
+
+        if dt == 0 or not self.flying:
+            self._last_acc_x = 0
+            self._last_acc_y = 0
+            return
+
+        self.velocity_x = self.velocity_x + 0.5 * (ax + self._last_acc_x) * dt
+        self.velocity_y = self.velocity_y + 0.5 * (ay + self._last_acc_y) * dt
+
+        self._last_acc_x = ax
+        self._last_acc_y = ay
+        return
+
+    def read_velocity(self):
+        '''
+        Returns the velocity of the frisbee
+        '''
+        mag = math.sqrt(self.velocity_x**2 + self.velocity_y**2)
+        return mag
     
-    #check if z-axis angular velocity is greater than thresholdS
-    def check_flight_z_gyro(self, threshold):
-        return self.imu.gyro[2] > threshold
+    def read_discrete_velocity(self, max_velocity, n):
+        '''
+        Returns a scaled velocity based on the max_velocity and number of discrete values to scale to
 
+        Returns a value from 1 to n
+        '''
+        mag = math.sqrt(self.velocity_x**2 + self.velocity_y**2)
+        if mag > max_velocity:
+            mag = max_velocity
 
+        if max_velocity <= 0 or n <= 1:
+            return 0
+        
+        # Scale to 1 - n
+        level = int((mag / max_velocity) * (n - 1)) + 1
+        return level
 
+    
+    def read_acceleration_mag(self):
+        '''
+        Returns the magnitude of the acceleration vector in a float
+        '''
+        ax, ay, az = self.imu.acceleration
+        mag = math.sqrt(ax**2 + ay**2 + az**2)
+        return mag
 
-    #function to send I2C data to IMU to configure interrupt pins
-    #(if we're feelin up for it)
-    def configure_interrupts(self):
-        pass
+    def read_forward_accel(self):
+        '''
+        Returns the magnitude of the forward acceleration
+
+        i.e. only the x and y axes
+        '''
+        ax, ay, az = self.imu.acceleration
+        mag = math.sqrt(ax**2 + ay**2)
+        return mag
+    
+    def detect_catch(self):
+        '''
+        Returns True if a catch is detected
+
+        Returns False otherwise
+        '''
+        detect_val = False
+
+        if (self.read_forward_accel() >= self.catch_threshold and self.flying):
+            detect_val = True
+
+            self.velocity_x=0
+            self.velocity_y=0
+            self._last_acc_x = 0
+            self._last_acc_y = 0
+            self.flying = False
+        
+        return detect_val
+    
+    def detect_throw(self):
+        '''
+        Returns True if a throw is detected
+
+        Returns False otherwise
+        '''
+
+        detect_val = False
+
+        if (self.read_forward_accel() >= self.flight_threshold):
+            detect_val = True
+            self.flying = True
+
+        
+        return detect_val
+    
+
+        
+
 
 
 
@@ -48,7 +172,7 @@ class IMUController:
 
 
 #possible data rates and ranges    
- '''   
+'''   
     ("RATE_SHUTDOWN", 0, 0, None),
     ("RATE_12_5_HZ", 1, 12.5, None),
     ("RATE_26_HZ", 2, 26.0, None),
@@ -71,5 +195,10 @@ class IMUController:
     ("RANGE_2G", 0, 2, 0.061),
     ("RANGE_16G", 1, 16, 0.488),
     ("RANGE_4G", 2, 4, 0.122),
-    ("RANGE_8G", 3, 8, 0.244),    
+    ("RANGE_8G", 3, 8, 0.244), 
+
+    ("SLOPE", 0, 0, None),
+    ("HPF_DIV100", 1, 0, None),
+    ("HPF_DIV9", 2, 0, None),
+    ("HPF_DIV400", 3, 0, None),   
 '''
