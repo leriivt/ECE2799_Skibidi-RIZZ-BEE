@@ -1,13 +1,10 @@
 #general imports
-import time
 import board
 from LEDs import *
 from audio import *
 from IO import *
 from motion_detection import *
 import digitalio
-import pwmio
-import asyncio
 
 #mode select
 from adafruit_debouncer import Debouncer
@@ -16,12 +13,6 @@ from adafruit_debouncer import Debouncer
 import adafruit_lsm6ds
 
 #audio
-import pio_i2s 
-import array
-import adafruit_wave
-import audiobusio
-import audiocore
-import audiodelays
 
 
 #SD Card
@@ -120,11 +111,11 @@ def main():
         else: #IN_FLIGHT
             #if a catch is detected:
                 #led.blink(num_blinks=3, blink_time_on=0.15, blink_time_off=0.1)
-                
+
             audio.play_audio(imu, led) #playaudio is blocking, needs imu and led instances to continue flight functionality
                 
             
-        time.sleep(0.01)  # 10 ms delay prevents 100% CPU usage
+        #time.sleep(0.01)  # 10 ms delay prevents 100% CPU usage
 
 
 def setup_SD():

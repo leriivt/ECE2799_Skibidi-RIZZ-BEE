@@ -1,23 +1,25 @@
 import board
 import digitalio
 import time
+from LEDs import *
+from motion_detection import *
 
 #audio out
 import audiocore
 from audiopwmio import PWMAudioOut as AudioOut
-import adafruit_wave
-import audiodelay
+import adafruit_wave 
+from audiocore import WaveFile
+
+# import audiodelays
+
 
 #microphone
 import pio_i2s
 
 #pitch shifting
-
 from audiobusio import I2SOut
 from audiocore import RawSample
 from audiodelays import PitchShift
-from audiomixer import Mixer
-
 
 # Audio Ssettings
 # SAMPLE_RATE = 48000
@@ -49,7 +51,8 @@ class AudioController:
 
         self.path = "/sd/kpop.wav" #initial path set to kpop song
         self.recording = False
-        self.wav_file = None
+        self.wav_file = "/sd/user.wav"
+    
 
         self.times_called = 0 #for toggle_song
 
@@ -61,19 +64,7 @@ class AudioController:
                 **properties,
             )
         
-        self.in_buf = bytearray(BUFFER_SIZE * 2)   # 16-bit mono 
-        self.out_buf = bytearray(BUFFER_SIZE * 2) 
-        self.out_sample = RawSample(self.out_buf, 
-                               sample_rate=properties["sample_rate"]) 
-
-        self.buffer_count = 0
-    
-        
-    #problems: real-time pitch shifting will be difficult: each buffer ~60ms,
-    # pitch shifting each buffer will sound bad and will make 'clicking' noise
-        #   options: 
-        #           save different pitch shifted audio files and play each one based on imu data
-        #           pitch shift audio every second using a counter
+        self.stop_audio = False
 
 
     def process_audio(self, imu_val): #assume imu_val > 3 -> flying
@@ -93,34 +84,42 @@ class AudioController:
 
     def play_audio(self, imu, led):
 
-        with open(self.path, "rb") as f:
-            wave = adafruit_wave.open(f)
+        # with open(self.path, "rb") as f:
 
-            while True:
 
+        if(self.stop_audio == False):
+
+            try:
+                f = open(self.path, "rb")
+
+                wave = WaveFile(f)
+                print("sample_rate:", wave.sample_rate, "channels:", wave.channel_count)
+                print("Playing...")
+                
+                self.pitchshift.semitones = 0
                 imu_val = imu.read_acceleration()
-                #led.do_led_shit()
+                
+                while imu_val > 3:
+                    self.pitchshift.play(wave)
+                    self.audio.play(self.pitchshift)
 
-                # only update pitch about once per second
-                if self.buffer_count % 32 == 0:
-                    self.pitchshift(imu_val)
+                    while self.audio.playing:
+                        time.sleep(1)
+                        imu_val = imu.read_acceleration()
 
-                data = wave.readframes(BUFFER_SIZE)
-                if not data:
-                    print("Error in reading data")
-                    break
+                        #do led shit here
+                        self.process_audio(imu_val)
+                    
+                    
+                f.close()
+                print("Done, sleeping...")
+                time.sleep(2)
 
-                self.in_buf[:len(data)] = data
-
-                # always pitch shift the chunk
-                self.pitchshift.render(self.in_buf, self.out_buf)
-
-                self.audio.play(self.out_sample, loop=False)
-
-                while self.audio.playing:
-                    pass
-
-                self.buffer_count += 1
+            except Exception as e:
+                print("Audio error:", e)
+                time.sleep(2)
+                
+        
 
     def start_recording(self):
 
@@ -143,6 +142,7 @@ class AudioController:
         
         self.mic.deinit()
         # close file so header is finalized
+        
         self.wav_file.close()
         self.wav_file = None
         self.recording = False
@@ -168,9 +168,13 @@ class AudioController:
     def toggle_audio(self): #toggle between microphone recorded audio & Kpop demon hunters
             self.times_called+=1  
 
-            if(self.times_called % 2):
+            if(self.times_called % 3 == 1):
+                self.stop_audio = False
                 self.path = "/sd/user.wav"
+            elif(self.times_called % 3 == 2):
+                self.stop_audio = True
             else:
+                self.stop_audio = False
                 self.path = "/sd/kpop.wav"
       
 
