@@ -6,30 +6,12 @@ from IO import *
 from motion_detection import *
 import digitalio
 
-#mode select
-from adafruit_debouncer import Debouncer
-
-#imu
-import adafruit_lsm6ds
-
-#audio
-
-
 #SD Card
 import os
 import adafruit_sdcard
 import storage
 
-
-#leds
-import neopixel
-
-
 #contains state logic for the microcontroller: idle, flying, etc.
-
-#IMPORTANT
-#SD Card is only peripheral initialized within code.py, everything else within respective files
-    #possible also audio so other tasks can be performed while this occurs
 
 def main():
 
@@ -58,13 +40,12 @@ def main():
         
         #check acceleration
         ang_acceleration = imu.read_acceleration() #scale from value 1-10
-        ang_orientation = imu.read_orientation()   #scale from value 1-10
+        gyro = imu.read_gyro()   #scale from value 1-10
 
         if(ang_acceleration <= 5):
             state = IDLE
         else:
             state = IN_FLIGHT
-            audio.process_audio(ang_acceleration) # Saves several pitch-shifted copies of the same audio file
             
             #start showin the LED pattern
             led.update_pattern()
@@ -113,8 +94,11 @@ def main():
         else: #IN_FLIGHT
             #if a catch is detected:
                 #led.blink(num_blinks=3, blink_time_on=0.15, blink_time_off=0.1)
+                
             audio.speaker_on()
             audio.play_audio(imu, led) #playaudio is blocking, needs imu and led instances to continue flight functionality
+
+            state = IDLE
                 
             
         #time.sleep(0.01)  # 10 ms delay prevents 100% CPU usage
@@ -123,12 +107,12 @@ def main():
 def setup_SD():
     try:
         cs = digitalio.DigitalInOut(board.GP8) # Chip Select
-        spi = busio.SPI(board.GP10, board.GP9, board.GP5)  # CLK, SI, SO
+        spi = busio.SPI(board.GP10, board.GP11, board.GP12)  # CLK, SI, SO
         sdcard = adafruit_sdcard.SDCard(spi, cs)
         vfs = storage.VfsFat(sdcard)
         storage.mount(vfs, "/sd")
-    except(Exception):
-        print("SD Card BS")
+    except Exception as e:
+        print("SD Card BS:", e)
 
     
 

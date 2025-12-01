@@ -28,7 +28,7 @@ BUFFER_SIZE = 512
 
 properties = {  # These properties will be shared with audioeffects objects
     "buffer_size": BUFFER_SIZE, #try buffer size = 1024
-    "sample_rate": 16000, # Reduced sample rate to save memory
+    "sample_rate": 24000, # Found 24kHz works best for wav file
     "channel_count": 1,
     "bits_per_sample": 16,
     "samples_signed": True,
@@ -85,9 +85,6 @@ class AudioController:
 
     def play_audio(self, imu, led):
 
-        # with open(self.path, "rb") as f:
-
-
         if(self.stop_audio == False):
 
             try:
@@ -100,7 +97,8 @@ class AudioController:
                 self.pitchshift.semitones = 0
                 imu_val = imu.read_acceleration()
                 
-                while imu_val > 3:
+                while imu_val > 3: #change later
+                    
                     self.pitchshift.play(wave)
                     self.audio.play(self.pitchshift)
 
@@ -113,8 +111,6 @@ class AudioController:
                     
                     
                 f.close()
-                print("Done, sleeping...")
-                time.sleep(2)
 
             except Exception as e:
                 print("Audio error:", e)

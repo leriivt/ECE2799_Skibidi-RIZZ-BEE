@@ -18,7 +18,7 @@ class IMUController:
         self.imu.accelerometer_data_rate = Rate.RATE_833_HZ
         self.imu.gyro_data_rate = Rate.RATE_833_HZ
         
-        self.imu.high_pass_filter(AccelHPF.HPF_DIV100)
+        self.imu.high_pass_filter = AccelHPF.HPF_DIV100
         self.imu.reset()
 
         #force flight_threshold to be positive
