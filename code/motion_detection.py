@@ -8,7 +8,7 @@ import time
 
 class IMUController:
 
-    def __init__(self, flight_threshold, catch_threshold):
+    def __init__(self, flight_threshold, catch_threshold, V_max):
         #we are using pins 20 and 21 for I2C
         i2c = busio.I2C(scl=board.GP21, sda=board.GP20)
         self.imu = LSM6DSOX(i2c) #.imu is an object based on the Adafruit library
@@ -26,6 +26,8 @@ class IMUController:
         
         #force catch_threshold to be negative
         self.catch_threshold = catch_threshold if catch_threshold <= 0 else catch_threshold * -1
+
+        self.V_max = V_max
         
         self.flying = False
         self.velocity_x = 0
@@ -89,21 +91,21 @@ class IMUController:
         mag = math.sqrt(self.velocity_x**2 + self.velocity_y**2)
         return mag
     
-    def read_discrete_velocity(self, max_velocity, n):
+    def read_discrete_velocity(self, n):
         '''
         Returns a scaled velocity based on the max_velocity and number of discrete values to scale to
 
         Returns a value from 1 to n
         '''
         mag = math.sqrt(self.velocity_x**2 + self.velocity_y**2)
-        if mag > max_velocity:
-            mag = max_velocity
+        if mag > self.V_max:
+            mag = self.V_max
 
-        if max_velocity <= 0 or n <= 1:
+        if self.V_max <= 0 or n <= 1:
             return 0
         
         # Scale to 1 - n
-        level = int((mag / max_velocity) * (n - 1)) + 1
+        level = int((mag / self.V_max) * (n - 1)) + 1
         return level
 
     

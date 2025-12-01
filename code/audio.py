@@ -69,18 +69,9 @@ class AudioController:
 
 
     def process_audio(self, imu_val): #assume imu_val > 3 -> flying
-        
-        if(3<imu_val<5):
-            self.pitchshift.semitones = -12 #pitchshift down 1 octave
-        
-        elif(5<imu_val<7):
-            self.pitchshift.semitones = 0 #no pitch shift
-        
-        elif(7<imu_val<9):
-            self.pitchshift.semitones = 6 #pitch shift up 1/2 octave
-        
-        elif(9<= imu_val <= 10):
-            self.pitchshift.semitones = 12 # pitch shift up 1 octave
+        shift = imu_val - 13 #shift imu_val from 1-25 to -12 to 12
+        self.pitchshift.semitones = shift 
+
         
 
     def play_audio(self, imu, led):
@@ -95,16 +86,19 @@ class AudioController:
                 print("Playing...")
                 
                 self.pitchshift.semitones = 0
-                imu_val = imu.read_acceleration()
                 
-                while imu_val > 3: #change later
+                while not imu.detect_catch():
                     
                     self.pitchshift.play(wave)
                     self.audio.play(self.pitchshift)
+                    imu.update_velocity()
 
-                    while self.audio.playing:
-                        time.sleep(1)
-                        imu_val = imu.read_acceleration()
+                    while self.audio.playing and not imu.detect_catch():
+                        time.sleep(.05)
+                        imu.update_velocity()
+
+                        #Read imu velocity from 1-25
+                        imu_val = imu.read_discrete_velocity(25)
 
                         #do led shit here
                         self.process_audio(imu_val)

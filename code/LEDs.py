@@ -126,7 +126,7 @@ class LEDController:
     def show_pattern(self):
         self.pixels.show()
     
-    def blink(self, pattern=None, num_blinks=1, blink_time_on=0.5, blink_time_off=0):
+    def blink(self, pattern=None, num_blinks=1, blink_time_on=0.5, blink_time_off=0.0):
         if self.pattern == OFF:
             pattern = DIM
             

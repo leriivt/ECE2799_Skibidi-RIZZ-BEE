@@ -17,11 +17,17 @@ def main():
 
     IDLE = 0
     IN_FLIGHT = 1
+    state = IDLE
 
     io = IOController()
     audio = AudioController()
     led = LEDController()
-    imu = IMUController()
+
+    CATCH_THRESHOLD = -5
+    FLIGHT_THRESHOLD = 5
+    MAX_VELOCITY = 10
+
+    imu = IMUController(flight_threshold=FLIGHT_THRESHOLD, catch_threshold=CATCH_THRESHOLD, V_max = MAX_VELOCITY)
 
     LED_Pattern = 0
 
@@ -38,18 +44,13 @@ def main():
     
     while True:
         
-        #check acceleration
-        ang_acceleration = imu.read_acceleration() #scale from value 1-10
-        gyro = imu.read_gyro()   #scale from value 1-10
-
-        if(ang_acceleration <= 5):
-            state = IDLE
-        else:
+        
+        if imu.detect_throw():
             state = IN_FLIGHT
+        elif imu.detect_catch():
+            led.blink(num_blinks=3, blink_time_on=0.15, blink_time_off=0.1)
+            state = IDLE
             
-            #start showin the LED pattern
-            led.update_pattern()
-            led.show_pattern()
 
         #State logic (changed to if statement since CircuitPython doesnt do match)
         if state == IDLE: 
@@ -91,14 +92,13 @@ def main():
                 led.update_pattern()
                     
                     
-        else: #IN_FLIGHT
-            #if a catch is detected:
-                #led.blink(num_blinks=3, blink_time_on=0.15, blink_time_off=0.1)
-                
+        elif state == IN_FLIGHT:
+            imu.update_velocity()
+            led.update_pattern()
+            led.show_pattern()
             audio.speaker_on()
             audio.play_audio(imu, led) #playaudio is blocking, needs imu and led instances to continue flight functionality
-
-            state = IDLE
+            
                 
             
         #time.sleep(0.01)  # 10 ms delay prevents 100% CPU usage
