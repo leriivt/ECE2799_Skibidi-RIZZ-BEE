@@ -19,13 +19,13 @@ class IMUController:
         self.imu.gyro_data_rate = Rate.RATE_833_HZ
         
         self.imu.high_pass_filter = AccelHPF.HPF_DIV100
-        self.imu.reset()
+      
 
         #force flight_threshold to be positive
-        self.flight_threshold = flight_threshold if flight_threshold >= 0 else flight_threshold * -1
+        self.flight_threshold = abs(flight_threshold)
         
-        #force catch_threshold to be negative
-        self.catch_threshold = catch_threshold if catch_threshold <= 0 else catch_threshold * -1
+        #force catch_threshold to be positive
+        self.catch_threshold = abs(catch_threshold)
 
         self.V_max = V_max
         
@@ -36,20 +36,49 @@ class IMUController:
         self._last_acc_x = 0
         self._last_acc_y = 0
 
+        self.init_ax = 0
+        self.init_ay = 0
+        self.init_az = 0
+        self.init_gx = 0
+        self.init_gy = 0
+        self.init_gz = 0
+
+        self.zero_imu()
+
         pass
     
+    def zero_imu(self, samples=50, delay=0.005):
+        sum_ax = sum_ay = sum_az = 0.0
+        sum_gx = sum_gy = sum_gz = 0.0
+        for _ in range(samples):
+            ax, ay, az = self.imu.acceleration
+            gx, gy, gz = self.imu.gyro
+            sum_ax += ax; sum_ay += ay; sum_az += az
+            sum_gx += gx; sum_gy += gy; sum_gz += gz
+            time.sleep(delay)
+        self.init_ax = sum_ax / samples
+        self.init_ay = sum_ay / samples
+        self.init_az = sum_az / samples
+        self.init_gx = sum_gx / samples
+        self.init_gy = sum_gy / samples
+        self.init_gz = sum_gz / samples
+
     
     def read_gyro(self):
         '''
         Returns a tuple with gyro data in radians/s
         '''
-        return self.imu.gyro
+        
+        gx, gy, gz = self.imu.gyro
+        return (gx - self.init_gx, gy - self.init_gy, gz-self.init_gz)
     
     def read_acceleration(self):
         '''
         Returns a tuple with accel data in m/s^2
         '''
-        return self.imu.acceleration
+        ax, ay, az = self.imu.acceleration
+        return (ax - self.init_ax, ay - self.init_ay, az - self.init_az)
+
     
     def _get_dt(self):
         '''
@@ -70,7 +99,7 @@ class IMUController:
         Should be run every loop while flying
         '''
         dt = min(self._get_dt(), 0.05)  # e.g. cap at 50 ms
-        ax, ay, az = self.imu.acceleration
+        ax, ay, az = self.read_acceleration()
 
         if dt == 0 or not self.flying:
             self._last_acc_x = 0
@@ -97,15 +126,16 @@ class IMUController:
 
         Returns a value from 1 to n
         '''
-        mag = math.sqrt(self.velocity_x**2 + self.velocity_y**2)
-        if mag > self.V_max:
-            mag = self.V_max
+        gx,gy,gz = self.read_gyro()
+        gz = abs(gz)
+        if gz > self.V_max:
+            gz = self.V_max
 
         if self.V_max <= 0 or n <= 1:
             return 0
         
         # Scale to 1 - n
-        level = int((mag / self.V_max) * (n - 1)) + 1
+        level = int((gz / self.V_max) * (n - 1)) + 1
         return level
 
     
@@ -113,7 +143,7 @@ class IMUController:
         '''
         Returns the magnitude of the acceleration vector in a float
         '''
-        ax, ay, az = self.imu.acceleration
+        ax, ay, az = self.read_acceleration()
         mag = math.sqrt(ax**2 + ay**2 + az**2)
         return mag
 
@@ -123,7 +153,7 @@ class IMUController:
 
         i.e. only the x and y axes
         '''
-        ax, ay, az = self.imu.acceleration
+        ax, ay, az = self.read_acceleration()
         mag = math.sqrt(ax**2 + ay**2)
         return mag
     
@@ -135,14 +165,18 @@ class IMUController:
         '''
         detect_val = False
 
-        if (self.read_forward_accel() >= self.catch_threshold and self.flying):
-            detect_val = True
+        gx,gy,gz = self.read_gyro()
 
-            self.velocity_x=0
-            self.velocity_y=0
-            self._last_acc_x = 0
-            self._last_acc_y = 0
+        if (gz < self.catch_threshold):
+            detect_val = True
             self.flying = False
+
+        # ax, ay, az = self.read_acceleration()
+        # if (ax <= self.catch_threshold or ay <= self.catch_threshold and self.flying):
+            
+        #     detect_val = True
+
+        #     self.flying = False
         
         return detect_val
     
@@ -152,12 +186,17 @@ class IMUController:
 
         Returns False otherwise
         '''
-
+        
         detect_val = False
-
-        if (self.read_forward_accel() >= self.flight_threshold):
+        gx,gy,gz = self.read_gyro()
+        if (gz > self.flight_threshold):
             detect_val = True
             self.flying = True
+
+        # if (self.read_forward_accel() >= self.flight_threshold and not self.flying):
+        #     detect_val = True
+        #     self.flying = True
+            
 
         
         return detect_val

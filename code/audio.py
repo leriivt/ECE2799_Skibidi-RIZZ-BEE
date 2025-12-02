@@ -91,11 +91,10 @@ class AudioController:
                     
                     self.pitchshift.play(wave)
                     self.audio.play(self.pitchshift)
-                    imu.update_velocity()
+                    
 
                     while self.audio.playing and not imu.detect_catch():
                         time.sleep(.05)
-                        imu.update_velocity()
 
                         #Read imu velocity from 1-25
                         imu_val = imu.read_discrete_velocity(25)
@@ -179,7 +178,3 @@ class AudioController:
             pass
         else:
             self.sd = False
-
-      
-
-
