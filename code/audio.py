@@ -28,7 +28,7 @@ BUFFER_SIZE = 512
 
 properties = {  # These properties will be shared with audioeffects objects
     "buffer_size": BUFFER_SIZE, #try buffer size = 1024
-    "sample_rate": 24000, # Found 24kHz works best for wav file
+    "sample_rate": 16000, # Found 24kHz works best for wav file
     "channel_count": 1,
     "bits_per_sample": 16,
     "samples_signed": True,
@@ -168,13 +168,7 @@ class AudioController:
                 self.path = "/sd/kpop.wav"
 
     def speaker_off(self):
-        if(self.sd == True):
-            pass
-        else:
-            self.sd = True
+        self.sd.value = False
 
     def speaker_on(self):
-        if(self.sd == False):
-            pass
-        else:
-            self.sd = False
+        self.sd.value = True
