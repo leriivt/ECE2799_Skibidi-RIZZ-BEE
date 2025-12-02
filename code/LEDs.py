@@ -10,6 +10,7 @@ from rainbowio import colorwheel
         - 
 '''
 NUM_PIXELS = 12
+NUM_PIXELS_SAC = NUM_PIXELS + 1
 
 OFF = 0
 RED = 1
@@ -29,19 +30,22 @@ DIM = 100
 STATIC_RAINBOW = 101
 
 colors = {
-    OFF : [(0 ,0, 0)] * NUM_PIXELS,
-    RED : [(255, 0, 0)] * NUM_PIXELS,
+    OFF : [(0 ,0, 0)] * NUM_PIXELS_SAC,
+    RED : [(255, 0, 0)] * NUM_PIXELS_SAC,
     #ORANGE : (255, 128, 0),
     #YELLOW : (255, 255, 51),
-    GREEN : [(51, 255, 51)] * NUM_PIXELS,
-    BLUE : [(0, 128, 255)] * NUM_PIXELS,
-    PURPLE : [(153, 51, 255)] * NUM_PIXELS,
+    GREEN : [(51, 255, 51)] * NUM_PIXELS_SAC,
+    BLUE : [(0, 128, 255)] * NUM_PIXELS_SAC,
+    PURPLE : [(153, 51, 255)] * NUM_PIXELS_SAC,
     #PINK : (255, 51, 153),
-    RAINBOW : [(255, 255, 255)] * NUM_PIXELS, #placeholder
-    HUNTRIX : [(255, 255, 255)] * NUM_PIXELS, #placeholder
-    GOLDEN : [(255, 255, 255)] * NUM_PIXELS,  #placeholder
-    DIM : [(20 ,20, 20)] * NUM_PIXELS
+    RAINBOW : [(255, 255, 255)] * NUM_PIXELS_SAC, #placeholder
+    HUNTRIX : [(255, 255, 255)] * NUM_PIXELS_SAC, #placeholder
+    GOLDEN : [(255, 255, 255)] * NUM_PIXELS_SAC,  #placeholder
+    DIM : [(20 ,20, 20)] * NUM_PIXELS_SAC
 }
+
+for key in colors:
+    colors[key][0] = (0,0,0)
 
 animation_delay = {
     RAINBOW : 0.02,
@@ -70,9 +74,9 @@ def rainbow_cycle(current, num_pixels):
         pixel_list[pixel] = colorwheel(pixel_index & 255)
     return pixel_list
 
-colors[RAINBOW] = rainbow_cycle(0, NUM_PIXELS)
-colors[HUNTRIX] = hue_cycle(0, 110, 230, 5, NUM_PIXELS)
-colors[GOLDEN] = hue_cycle(0, 14, 22, 4, NUM_PIXELS)
+colors[RAINBOW][1:] = rainbow_cycle(0, NUM_PIXELS)
+colors[HUNTRIX][1:] = hue_cycle(0, 110, 230, 5, NUM_PIXELS)
+colors[GOLDEN][1:] = hue_cycle(0, 14, 22, 4, NUM_PIXELS)
 
 class LEDController:
     
@@ -81,7 +85,7 @@ class LEDController:
         self.static = static
         self.dynamic_offset = 0 #offset for cycling through dynamic patterns
         self.last_update = 0
-        self.num_pixels = NUM_PIXELS
+        self.num_pixels = NUM_PIXELS_SAC
         
         self.pixels = neopixel.NeoPixel(board.GP22, self.num_pixels)
         self.pixels.brightness = brightness
@@ -111,12 +115,13 @@ class LEDController:
     def dynamic_update_show(self):
         current_time = time.monotonic()
         if (not self.static) and (current_time - self.last_update >= animation_delay[self.pattern]):
+            pixel_list = [(0 ,0, 0)] * NUM_PIXELS_SAC
             if self.pattern == RAINBOW:
-                pixel_list = rainbow_cycle(self.dynamic_offset, self.num_pixels)
+                pixel_list[1:] = rainbow_cycle(self.dynamic_offset, self.num_pixels)
             elif self.pattern == HUNTRIX:
-                pixel_list = hue_cycle(self.dynamic_offset, 110, 230, 5, self.num_pixels)
+                pixel_list[1:] = hue_cycle(self.dynamic_offset, 110, 230, 5, self.num_pixels)
             else: #GOLDEN
-                pixel_list = hue_cycle(self.dynamic_offset, 14, 22, 4, self.num_pixels)
+                pixel_list[1:] = hue_cycle(self.dynamic_offset, 14, 22, 4, self.num_pixels)
             
             self.last_update = current_time
             self.dynamic_offset += 1
