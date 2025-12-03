@@ -76,6 +76,8 @@ def main():
 
             if imu.detect_throw():
                 state = IN_FLIGHT
+                led.update_pattern()
+                led.show_pattern()
                             
         elif state == IN_FLIGHT:
             imu.update_velocity()
