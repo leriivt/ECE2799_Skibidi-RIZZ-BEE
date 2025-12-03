@@ -19,6 +19,8 @@ def main():
     IN_FLIGHT = 1
     state = IDLE
 
+    setup_SD()
+
     io = IOController()
     audio = AudioController()
     led = LEDController()
@@ -30,17 +32,6 @@ def main():
     imu = IMUController(flight_threshold=FLIGHT_THRESHOLD, catch_threshold=CATCH_THRESHOLD, V_max = MAX_VELOCITY)
 
     LED_Pattern = 0
-
-
-    #file path: "/sd"
-    setup_SD()
-    #PATH = '/sd/kpop.wav' #initial path to kpop demon hunters
-
-    #For testing:
-    #onboard_led = digitalio.DigitalInOut(board.LED)
-    #onboard_led.direction = digitalio.Direction.OUTPUT
-
-
     
     while True:
             
