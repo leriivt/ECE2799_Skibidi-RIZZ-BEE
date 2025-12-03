@@ -28,7 +28,7 @@ BUFFER_SIZE = 512
 
 properties = {  # These properties will be shared with audioeffects objects
     "buffer_size": BUFFER_SIZE, #try buffer size = 1024
-    "sample_rate": 16000, # Found 24kHz works best for wav file
+    "sample_rate": 24000, # Found 24kHz works best for wav file
     "channel_count": 1,
     "bits_per_sample": 16,
     "samples_signed": True,
@@ -50,7 +50,7 @@ class AudioController:
         **properties
         )
 
-        self.path = "/sd/kpop.wav" #initial path set to kpop song
+        self.path = "/sd/scream.wav" #initial path set to kpop song
         self.recording = False
         self.wav_file = "/sd/user.wav"
     
@@ -69,7 +69,7 @@ class AudioController:
 
 
     def process_audio(self, imu_val): #assume imu_val > 3 -> flying
-        shift = imu_val - 13 #shift imu_val from 1-25 to -12 to 12
+        shift = imu_val - 7 #shift imu_val from 1-13 to -6 to 6
         self.pitchshift.semitones = shift 
 
         
@@ -80,7 +80,7 @@ class AudioController:
 
             try:
                 f = open(self.path, "rb")
-
+                #f.seek(0)
                 wave = WaveFile(f)
                 print("sample_rate:", wave.sample_rate, "channels:", wave.channel_count)
                 print("Playing...")
@@ -97,9 +97,10 @@ class AudioController:
                         time.sleep(.05)
 
                         #Read imu velocity from 1-25
-                        imu_val = imu.read_discrete_velocity(25)
+                        imu_val = imu.read_discrete_velocity(13)
 
                         #do led shit here
+                        led.dynamic_update_show()
                         self.process_audio(imu_val)
                     
                     

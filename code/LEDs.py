@@ -116,15 +116,17 @@ class LEDController:
         current_time = time.monotonic()
         if (not self.static) and (current_time - self.last_update >= animation_delay[self.pattern]):
             pixel_list = [(0 ,0, 0)] * NUM_PIXELS_SAC
+            
             if self.pattern == RAINBOW:
-                pixel_list[1:] = rainbow_cycle(self.dynamic_offset, self.num_pixels)
+                pixel_list[1:] = rainbow_cycle(self.dynamic_offset, self.num_pixels - 1)
             elif self.pattern == HUNTRIX:
-                pixel_list[1:] = hue_cycle(self.dynamic_offset, 110, 230, 5, self.num_pixels)
+                pixel_list[1:] = hue_cycle(self.dynamic_offset, 110, 230, 5, self.num_pixels - 1)
             else: #GOLDEN
-                pixel_list[1:] = hue_cycle(self.dynamic_offset, 14, 22, 4, self.num_pixels)
+                pixel_list[1:] = hue_cycle(self.dynamic_offset, 14, 22, 4, self.num_pixels - 1)
             
             self.last_update = current_time
             self.dynamic_offset += 1
+
             self.pixels[:] = pixel_list
             self.show_pattern()
     

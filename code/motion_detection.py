@@ -136,7 +136,8 @@ class IMUController:
         
         # Scale to 1 - n
         level = int((gz / self.V_max) * (n - 1)) + 1
-        return level
+        #return level
+        return 7
 
     
     def read_acceleration_mag(self):

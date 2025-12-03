@@ -37,24 +37,16 @@ def main():
     #PATH = '/sd/kpop.wav' #initial path to kpop demon hunters
 
     #For testing:
-    onboard_led = digitalio.DigitalInOut(board.LED)
-    onboard_led.direction = digitalio.Direction.OUTPUT
+    #onboard_led = digitalio.DigitalInOut(board.LED)
+    #onboard_led.direction = digitalio.Direction.OUTPUT
 
 
     
     while True:
-        
-        
-        if imu.detect_throw():
-            state = IN_FLIGHT
-        elif imu.detect_catch():
-            led.blink(num_blinks=3, blink_time_on=0.15, blink_time_off=0.1)
-            state = IDLE
             
 
         #State logic (changed to if statement since CircuitPython doesnt do match)
         if state == IDLE: 
-
             audio.speaker_off()
 
             io.update_buttons()
@@ -71,13 +63,13 @@ def main():
                 #show red LEDs
                 led.record_start()
                 
-                audio.start_recording()
+                #audio.start_recording()
 
                 while(io.check_recording()): #Press and hold to record audio
-                    audio.record_audio()
+                    #audio.record_audio()
                     io.update_buttons()
 
-                audio.stop_recording()
+                #audio.stop_recording()
                             
                 #turn LEDS off
                 #show leds off, reload stored pattern
@@ -86,18 +78,25 @@ def main():
             elif button == 2: #BTN2 -> Toggle audio
                 audio.toggle_audio()
 
-            elif button == 3: #BTN2 -> Change LED Pattern
+            elif button == 3: #BTN3 -> Change LED Pattern
                 led.increment_pattern()
                 led.blink()
                 led.update_pattern()
-                    
-                    
+
+            if imu.detect_throw():
+                state = IN_FLIGHT
+                            
         elif state == IN_FLIGHT:
             imu.update_velocity()
-            led.update_pattern()
-            led.show_pattern()
+            #led.update_pattern()
+            #led.show_pattern()
+            #led.dynamic_update_show()
             audio.speaker_on()
             audio.play_audio(imu, led) #playaudio is blocking, needs imu and led instances to continue flight functionality
+
+            if imu.detect_catch():
+                led.blink(num_blinks=3, blink_time_on=0.15, blink_time_off=0.1)
+                state = IDLE
             
                 
             
