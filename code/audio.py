@@ -50,7 +50,7 @@ class AudioController:
         **properties
         )
 
-        self.path = "/sd/scream.wav" #initial path set to kpop song
+        self.path = "/sd/xmas.wav" #initial path set to kpop song
         self.recording = False
         self.wav_file = "/sd/user.wav"
     
@@ -217,6 +217,8 @@ class AudioController:
                 self.stop_audio = True
                 
                 
+
+
 
 
 
