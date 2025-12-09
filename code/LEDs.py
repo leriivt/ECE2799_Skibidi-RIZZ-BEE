@@ -34,7 +34,7 @@ colors = {
     RED : [(255, 0, 0)] * NUM_PIXELS_SAC,
     #ORANGE : (255, 128, 0),
     #YELLOW : (255, 255, 51),
-    GREEN : [(51, 255, 51)] * NUM_PIXELS_SAC,
+    GREEN : [(0, 255, 0)] * NUM_PIXELS_SAC,
     BLUE : [(0, 128, 255)] * NUM_PIXELS_SAC,
     PURPLE : [(153, 51, 255)] * NUM_PIXELS_SAC,
     #PINK : (255, 51, 153),
@@ -211,7 +211,3 @@ class LEDController:
             self.pixels.show()
             time.sleep(wait)
     '''
-
-
-
-

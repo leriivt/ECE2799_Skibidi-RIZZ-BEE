@@ -64,53 +64,82 @@ class AudioController:
                 overlap=max(BUFFER_SIZE>>3, 64),
                 **properties,
             )
+        self.pitchshift_state = False
         
         self.stop_audio = False
+        self.f = open(self.path, "rb")
+        self.wave = WaveFile(self.f)
+        
 
 
     def process_audio(self, imu_val): #assume imu_val > 3 -> flying
         shift = imu_val - 7 #shift imu_val from 1-13 to -6 to 6
         self.pitchshift.semitones = shift 
 
-        
+    def toggle_pitchshift(self):
+        self.pitchshift.semitones = 0
+        self.pitchshift_state = not self.pitchshift_state
 
     def play_audio(self, imu, led):
 
         if(self.stop_audio == False):
 
-            try:
-                f = open(self.path, "rb")
-                #f.seek(0)
-                wave = WaveFile(f)
-                print("sample_rate:", wave.sample_rate, "channels:", wave.channel_count)
-                print("Playing...")
+            # try:
+                # if self.wave is None or not self.audio.paused:
+                #     self.f = open(self.path, "rb")
+                #     self.wave = WaveFile(self.f)
                 
-                self.pitchshift.semitones = 0
-                
-                while not imu.detect_catch():
-                    
-                    self.pitchshift.play(wave)
-                    self.audio.play(self.pitchshift)
-                    
+                #self.pitchshift.semitones = 0
 
-                    while self.audio.playing and not imu.detect_catch():
+                #self.audio.play(self.pitchshift)   # start once
+
+                if(self.audio.paused == True): #paused   
+                    #self.audio.resume(self.pitchshift)
+                    # self.audio.resume(self.wave)
+                    self.audio.resume()
+                else:
+                    #self.audio.play(self.wave)
+                    self.audio.play(self.pitchshift.play(self.wave))
+
+                while not imu.detect_catch():
+
+                    while self.audio.playing:
                         time.sleep(.05)
 
-                        #Read imu velocity from 1-25
-                        imu_val = imu.read_discrete_velocity(13)
+                        if self.pitchshift_state == True:
+                            #Read imu velocity from 1-13
+                            imu_val = imu.read_discrete_velocity(13)
+                        else:
+                            imu_val = 7
 
                         #do led shit here
+                        led.update_pattern()
+                        # led.show_pattern()
                         led.dynamic_update_show()
+                        
                         self.process_audio(imu_val)
-                    
-                    
-                f.close()
+                        if imu.detect_catch():
+                            self.audio.pause()
+                            #print("paused")
+                            break
 
-            except Exception as e:
-                print("Audio error:", e)
-                time.sleep(2)
+
+            # except Exception as e:
+            #     print("Audio error:", e)
+            #     time.sleep(2)
                 
-        
+    def play_sample(self):
+        self.speaker_on()
+        self.f = open(self.path, "rb")
+        self.wave = WaveFile(self.f)
+
+
+        self.audio.play(self.wave)
+        while self.audio.playing:
+            time.sleep(2)
+            self.audio.stop()
+        # self.delete_wave()
+
 
     def start_recording(self):
 
@@ -158,18 +187,46 @@ class AudioController:
 
     def toggle_audio(self): #toggle between microphone recorded audio & Kpop demon hunters
             self.times_called+=1  
+            self.paused = False
 
-            if(self.times_called % 3 == 1):
+            try:
+                self.delete_wave()
+            except Exception as e: #if file already closed
+                pass
+            
+            if(self.times_called % 7 == 1):
                 self.stop_audio = False
-                self.path = "/sd/user.wav"
-            elif(self.times_called % 3 == 2):
-                self.stop_audio = True
-            else:
-                self.stop_audio = False
+                self.path = "/sd/scream.wav"
+                self.play_sample()
+            elif(self.times_called % 7 == 2):
+                self.path = "/sd/throat.wav"
+                self.play_sample()
+            elif(self.times_called % 7 == 3):
+                self.path = "/sd/dance.wav"
+                self.play_sample()
+            elif(self.times_called % 7 == 4):
+                self.path = "/sd/xmas.wav"
+                self.play_sample()
+            elif(self.times_called % 7 == 5):
                 self.path = "/sd/kpop.wav"
+                self.play_sample()
+            elif(self.times_called % 7 == 6):
+                self.path = "/sd/sit_still.wav"
+                self.play_sample()
+            elif(self.times_called % 7 == 0):
+                self.stop_audio = True
+                
+                
+
+
 
     def speaker_off(self):
         self.sd.value = False
 
     def speaker_on(self):
         self.sd.value = True
+
+    def delete_wave(self):
+        self.f.close()          # close file handle
+        self.wave = None        # remove reference
+        self.paused = False

@@ -19,7 +19,7 @@ class IOController:
         self.BTN_audio_sel_pin.pull = digitalio.Pull.UP
         self.BTN_audio_sel = Button(self.BTN_audio_sel_pin)
         
-        self.BTN_LED_pin = digitalio.DigitalInOut(board.GP3)
+        self.BTN_LED_pin = digitalio.DigitalInOut(board.GP5)
         self.BTN_LED_pin.direction = digitalio.Direction.INPUT
         self.BTN_LED_pin.pull = digitalio.Pull.UP
         self.BTN_LED = Button(self.BTN_LED_pin)
@@ -40,7 +40,7 @@ class IOController:
     
     def read_buttons(self): #active low buttons
     
-        if(self.BTN_record.long_press):
+        if(self.BTN_record.pressed):
             return 1
         elif(self.BTN_audio_sel.pressed):
             return 2
@@ -51,8 +51,3 @@ class IOController:
         
     def check_recording(self):
         return not self.BTN_record.released
-        
-
-
-
-

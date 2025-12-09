@@ -43,7 +43,7 @@ class IMUController:
         self.init_gy = 0
         self.init_gz = 0
 
-        self.zero_imu()
+        self.zero_imu(samples=100)
 
         pass
     
@@ -72,6 +72,10 @@ class IMUController:
         gx, gy, gz = self.imu.gyro
         return (gx - self.init_gx, gy - self.init_gy, gz-self.init_gz)
     
+    def read_gz(self):
+        _,_,gz = self.read_gyro()
+        return gz
+
     def read_acceleration(self):
         '''
         Returns a tuple with accel data in m/s^2
@@ -136,8 +140,8 @@ class IMUController:
         
         # Scale to 1 - n
         level = int((gz / self.V_max) * (n - 1)) + 1
-        #return level
-        return 7
+        return level
+        #return n//2
 
     
     def read_acceleration_mag(self):

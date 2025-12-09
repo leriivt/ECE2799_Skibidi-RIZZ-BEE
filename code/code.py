@@ -10,6 +10,7 @@ import digitalio
 import os
 import adafruit_sdcard
 import storage
+import busio
 
 #contains state logic for the microcontroller: idle, flying, etc.
 
@@ -19,29 +20,21 @@ def main():
     IN_FLIGHT = 1
     state = IDLE
 
+    setup_SD()
+
     io = IOController()
     audio = AudioController()
     led = LEDController()
 
     CATCH_THRESHOLD = -5
     FLIGHT_THRESHOLD = 5
-    MAX_VELOCITY = 10
+    MAX_VELOCITY = 25
 
     imu = IMUController(flight_threshold=FLIGHT_THRESHOLD, catch_threshold=CATCH_THRESHOLD, V_max = MAX_VELOCITY)
 
     LED_Pattern = 0
+    led.blink(pattern=GREEN, num_blinks=3, blink_time_on=0.15, blink_time_off=0.1)
 
-
-    #file path: "/sd"
-    setup_SD()
-    #PATH = '/sd/kpop.wav' #initial path to kpop demon hunters
-
-    #For testing:
-    #onboard_led = digitalio.DigitalInOut(board.LED)
-    #onboard_led.direction = digitalio.Direction.OUTPUT
-
-
-    
     while True:
             
 
@@ -52,30 +45,17 @@ def main():
             io.update_buttons()
                 
             button = io.read_buttons()
-
+            
             if button == 0: #No button pressed
                 pass
                     
                     
-            elif button == 1: #BTN1 -> Record audio; at this point this button has been long pressed
+            elif button == 1: #BTN1 -> Turn Pitchshifting on/off
+                audio.toggle_pitchshift()
                 
-                #turn LEDs red
-                #show red LEDs
-                led.record_start()
-                
-                #audio.start_recording()
-
-                while(io.check_recording()): #Press and hold to record audio
-                    #audio.record_audio()
-                    io.update_buttons()
-
-                #audio.stop_recording()
-                            
-                #turn LEDS off
-                #show leds off, reload stored pattern
-                led.record_end()
                     
             elif button == 2: #BTN2 -> Toggle audio
+                audio.speaker_on()
                 audio.toggle_audio()
 
             elif button == 3: #BTN3 -> Change LED Pattern
@@ -85,9 +65,11 @@ def main():
 
             if imu.detect_throw():
                 state = IN_FLIGHT
+                led.update_pattern()
+                led.show_pattern()
                             
         elif state == IN_FLIGHT:
-            imu.update_velocity()
+            #imu.update_velocity()
             #led.update_pattern()
             #led.show_pattern()
             #led.dynamic_update_show()
@@ -118,4 +100,3 @@ def setup_SD():
 
 if __name__ == "__main__":
     main()
-
